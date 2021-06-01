@@ -2,10 +2,10 @@ package com.junhee.researchWeb.user.model;
 
 public class UserVO {
 	
-	private String memberType; // ÇĞºÎ»ı, ´ëÇĞ¿ø»ı, °­»ç, Áöµµ±³¼ö
+	private String memberType; // í•™ë¶€ìƒ, ëŒ€í•™ì›ìƒ, ê°•ì‚¬, ì§€ë„êµìˆ˜
 	private String userId;
 	private String userPw;
-	private String identifiedNum; // ÇĞ¹ø, ±³¹ø
+	private String identifiedNum; // í•™ë²ˆ, êµë²ˆ
 	private String userName;
 	private String email;
 	private String phoneNum;

@@ -29,22 +29,22 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@GetMapping("/login") // ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿
+	@GetMapping("/login") // ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ì´ë™
 	public void Login() {
-		System.out.println("·Î±×ÀÎ ¿äÃ»: GET");
+		System.out.println("ë¡œê·¸ì¸ ìš”ì²­: GET");
 	}
 	
 	@PostMapping("/login")
 	public String LoginProcess(UserVO user, RedirectAttributes ra, HttpSession session) {
-		System.out.println("·Î±×ÀÎ ¿äÃ»: POST");
+		System.out.println("ë¡œê·¸ì¸ ìš”ì²­: POST");
 		System.out.println(user);
 		String msg = service.getLoginCheckMessage(user);
-		if(!msg.equals("·Î±×ÀÎ ¼º°ø")) {
-			System.out.println("ÄÁÆ®·Ñ·¯: " + msg);
+		if(!msg.equals("ë¡œê·¸ì¸ ì„±ê³µ")) {
+			System.out.println("ì»¨íŠ¸ë¡¤ëŸ¬: " + msg);
 			ra.addFlashAttribute("msg", msg);
 			return "redirect:/user/login";
 		} else {
-			System.out.println("ÄÁÆ®·Ñ·¯: " + msg);
+			System.out.println("ì»¨íŠ¸ë¡¤ëŸ¬: " + msg);
 			System.out.println(service.getOneUserInfo(user));
 			session.setAttribute("member", service.getOneUserInfo(user));
 			return "redirect:/user/mypage";
@@ -64,7 +64,7 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/checkId")
 	public String checkId(@RequestParam("id") String id) {
-		System.out.println("¾ÆÀÌµğ Áßº¹ Ã¼Å© ¿äÃ»!" + id);
+		System.out.println("ì•„ì´ë”” ì¤‘ë³µ ì²´í¬ ìš”ì²­!" + id);
 		UserVO user = new UserVO();
 		user.setUserId(id);
 		if(service.getOneUserInfo(user) != null) {
@@ -78,16 +78,16 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/checkIdNum")
 	public String checkIdNum(@RequestParam("idNum") String idNum) {
-		System.out.println("ÇĞ¹ø Áßº¹ Ã¼Å© ¿äÃ»!" + idNum);
+		System.out.println("í•™ë²ˆ ì¤‘ë³µ ì²´í¬ ìš”ì²­!!" + idNum);
 		return service.checkIdNum(idNum);
 	}
 	
 	@PostMapping("/register2")
-	public String RegisterInsert(UserVO user, RedirectAttributes ra) { // ¾î´À °æ¿ì¿¡ ¸®´ÙÀÌ·ºÆ® ÇÏ´õ¶ó..
-		System.out.println("È¸¿ø°¡ÀÔ ÃÖÁ¾ ¿äÃ»!");
-		System.out.println(user + "°¡ ÄÁÆ®·Ñ·¯¿¡ Àü´Ş");
+	public String RegisterInsert(UserVO user, RedirectAttributes ra) { // ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½Æ® ï¿½Ï´ï¿½ï¿½ï¿½..
+		System.out.println("íšŒì›ê°€ì… ìµœì¢… ìš”ì²­!");
+		System.out.println(user + "ê°€ ì»¨íŠ¸ë¡¤ëŸ¬ì— ì „ë‹¬");
 		service.Register(user);
-		ra.addFlashAttribute("msg", "È¸¿ø°¡ÀÔ ¼º°ø!");
+		ra.addFlashAttribute("msg", "íšŒì›ê°€ì… ì„±ê³µ!");
 		return "redirect:/user/login";
 	}
 	
@@ -105,15 +105,15 @@ public class UserController {
 	
 	@PostMapping("/updatePw")
 	public String updatePw2(UserVO user, String newPw, RedirectAttributes ra) {
-		System.out.println("ºñ¹Ğ¹øÈ£ º¯°æ ¿äÃ»ÀÌ µé¾î¿È");
+		System.out.println("ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ìš”ì²­ì´ ë“¤ì–´ì˜´");
 		System.out.println("Id: " + user.getUserId() + ", newPw: " + newPw );
 		String msg = service.getLoginCheckMessage(user);
-		if(!msg.equals("·Î±×ÀÎ ¼º°ø")) {
-			ra.addFlashAttribute("msg", "ÇöÀç ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+		if(!msg.equals("ë¡œê·¸ì¸ ì„±ê³µ")) {
+			ra.addFlashAttribute("msg", "í˜„ì¬ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		}
 		else {
 			service.UpdatePassword(user.getUserId(), newPw);
-			ra.addFlashAttribute("msg", "ºñ¹Ğ¹øÈ£ º¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+			ra.addFlashAttribute("msg", "ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 		}
 		return "redirect:/user/mypage";
 	}
@@ -123,7 +123,7 @@ public class UserController {
 	
 	@GetMapping("/acceptResearcher")
 	public String acceptResearcher1(@RequestParam("major") String major, Model m) {
-		System.out.println("´ëÇĞ¿ø»ı ¸®½ºÆ® ¿äÃ»ÀÌ µé¾î¿È" + major);
+		System.out.println("ï¿½ï¿½ï¿½Ğ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½" + major);
 		m.addAttribute("GStudentList", service.getGStudentsInfo(major));
 		return "user/acceptResearcher";
 	}
@@ -131,13 +131,13 @@ public class UserController {
 	//@PostMapping("/acceptResearcher")
 	@RequestMapping(value="/acceptResearcher2", method=RequestMethod.POST)
 	public String acceptResearcher2(@ModelAttribute(value="UserListVO") UserListVO userList, String major, RedirectAttributes ra) {
-		System.out.println("´ëÇĞ¿ø»ı °¡ÀÔ ½ÂÀÎ º¯°æ ¿äÃ» / major: " + major);
+		System.out.println("ëŒ€í•™ì›ìƒ ê°€ì… ìŠ¹ì¸ ë³€ê²½ ìš”ì²­ / major: " + major);
 		List<UserVO> uList = userList.getuList();
 		for(UserVO u : uList) {
 			System.out.println(u);
 		}
 		service.ChangePermit(uList);
-		ra.addFlashAttribute("msg", "°¡ÀÔ ½ÂÀÎ Á¤º¸°¡ º¯°æµÇ¾ú½À´Ï´Ù.");
+		ra.addFlashAttribute("msg", "ê°€ì… ìŠ¹ì¸ ì •ë³´ê°€ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		return "redirect:/user/mypage";
 	}
 	
@@ -147,7 +147,7 @@ public class UserController {
 	@PostMapping("/deleteUser")
 	@ResponseBody
 	public String deleteUser2(String userId) {
-		System.out.println("È¸¿ø Å»Åğ ¿äÃ»: " + userId);
+		System.out.println("íšŒì› íƒˆí‡´ ìš”ì²­: " + userId);
 		service.DeleteUser(userId);
 		return "OK";
 	}

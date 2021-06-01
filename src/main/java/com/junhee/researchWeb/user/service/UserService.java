@@ -17,7 +17,7 @@ public class UserService implements IUserService {
 	
 	@Override
 	public void Register(UserVO user) {
-		System.out.println("¼­ºñ½º±îÁö È¸¿ø°¡ÀÔ ÃÖÁ¾ ¿äÃ»ÀÌ µé¾î¿È.");
+		System.out.println("ì„œë¹„ìŠ¤ê¹Œì§€ íšŒì›ê°€ì… ìµœì¢… ìš”ì²­ì´ ë“¤ì–´ì˜´.");
 		mapper.Register(user);
 	}
 	
@@ -29,23 +29,23 @@ public class UserService implements IUserService {
 	@Override
 	public String getLoginCheckMessage(UserVO user) {
 		UserVO userCheck = mapper.getOneUserInfo(user.getUserId());
-		System.out.println("¼­ºñ½º °´Ã¼ ·Î±×ÀÎ ¿äÃ» Ã³¸®\n" + user);
+		System.out.println("ì„œë¹„ìŠ¤ ê°ì²´ ë¡œê·¸ì¸ ìš”ì²­ ì²˜ë¦¬\n" + user);
 		if(userCheck == null) {
-			System.out.println("¼­ºñ½º: ÀÏÄ¡ÇÏ´Â id°¡ ¾ø½À´Ï´Ù.");
-			return "ÀÏÄ¡ÇÏ´Â id°¡ ¾ø½À´Ï´Ù.";
+			System.out.println("ì„œë¹„ìŠ¤: ì¼ì¹˜í•˜ëŠ” idê°€ ì—†ìŠµë‹ˆë‹¤.");
+			return "ì¼ì¹˜í•˜ëŠ” idê°€ ì—†ìŠµë‹ˆë‹¤.";
 		} else { 
 			if(!userCheck.getMemberType().equals(user.getMemberType())) { 
-				System.out.println("¼­ºñ½º: È¸¿øºĞ·ù°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
-				return "È¸¿øºĞ·ù°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+				System.out.println("ì„œë¹„ìŠ¤: íšŒì›ë¶„ë¥˜ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+				return "íšŒì›ë¶„ë¥˜ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 			} else if(!userCheck.getUserPw().equals(user.getUserPw())) {
-				System.out.println("¼­ºñ½º: ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
-				return "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+				System.out.println("ì„œë¹„ìŠ¤: ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+				return "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 			} else if(userCheck.getPermit() != 1) {
-				System.out.println("¼­ºñ½º: °¡ÀÔ ½ÂÀÎÀÌ ³ªÁö ¾Ê¾Æ ·Î±×ÀÎÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.");
-				return "°¡ÀÔ ½ÂÀÎÀÌ ³ªÁö ¾Ê¾Æ ·Î±×ÀÎÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.";
+				System.out.println("ì„œë¹„ìŠ¤: ê°€ì… ìŠ¹ì¸ì´ ë‚˜ì§€ ì•Šì•„ ë¡œê·¸ì¸í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+				return "ê°€ì… ìŠ¹ì¸ì´ ë‚˜ì§€ ì•Šì•„ ë¡œê·¸ì¸í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.";
 			} else {
-				System.out.println("¼­ºñ½º: ·Î±×ÀÎ ¼º°ø");
-				return "·Î±×ÀÎ ¼º°ø";
+				System.out.println("ì„œë¹„ìŠ¤: ë¡œê·¸ì¸ ì„±ê³µ");
+				return "ë¡œê·¸ì¸ ì„±ê³µ";
 			}
 		}
 	}

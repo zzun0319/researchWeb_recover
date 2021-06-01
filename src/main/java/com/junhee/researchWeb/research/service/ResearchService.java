@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.junhee.researchWeb.research.model.ResearchVO;
+import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.research.repository.IResearchMapper;
 
 @Service
@@ -16,7 +16,7 @@ public class ResearchService implements IResearchService {
 
 	@Override
 	public void registerResearch(ResearchVO rvo) {
-		if(rvo.getRewardType() == "«–¡°") {
+		if(rvo.getRewardType() == "ÌïôÏ†ê") {
 			if(rvo.getTakeTime() <= 30) {
 				rvo.setRewardValue(1);
 			} else if(rvo.getTakeTime() > 30 && rvo.getTakeTime() <= 60) {
@@ -31,6 +31,11 @@ public class ResearchService implements IResearchService {
 	}
 
 	@Override
+	public List<ResearchVO> getMyResearch(String researcher) {
+		return mapper.getMyResearch(researcher);
+	}
+	
+	@Override
 	public ResearchVO getResearchInfo(int researchId) {
 		return mapper.getResearchInfo(researchId);
 	}
@@ -39,4 +44,10 @@ public class ResearchService implements IResearchService {
 	public List<ResearchVO> getAllResearch() {
 		return mapper.getAllResearch();
 	}
+
+	@Override
+	public List<ResearchVO> getSameMajorResearch(String major) {
+		return mapper.getSameMajorResearch(major);
+	}
+
 }

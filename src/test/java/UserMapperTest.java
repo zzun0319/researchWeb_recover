@@ -16,49 +16,49 @@ public class UserMapperTest {
 	@Autowired
 	private IUserMapper mapper;
 	
-	// È¸¿ø°¡ÀÔ ´ÜÀ§ Å×½ºÆ®
+	// íšŒì›ê°€ì… ë‹¨ìœ„ í…ŒìŠ¤íŠ¸
 	@Test
 	public void insertTest() {
 		UserVO user1 = new UserVO();
-		user1.setMemberType("ÇĞºÎ»ı");
+		user1.setMemberType("í•™ë¶€ìƒ");
 		user1.setUserId("participant12");
 		user1.setUserPw("participant1");
 		user1.setIdentifiedNum("201121725");
-		user1.setUserName("È«±æµ¿");
+		user1.setUserName("í™ê¸¸ë™");
 		user1.setEmail("participant1@naver.com");
 		user1.setPhoneNum("01011112222");
 		mapper.Register(user1);
 		//////////////////////////////
 		UserVO user2 = new UserVO();
-		user2.setMemberType("´ëÇĞ¿ø»ı"); 
+		user2.setMemberType("ëŒ€í•™ì›ìƒ"); 
 		user2.setUserId("researcher1");
 		user2.setUserPw("researcher1");
 		user2.setIdentifiedNum("201812345");
-		user2.setUserName("ÀÌ¼ø½Å");
+		user2.setUserName("ì´ìˆœì‹ ");
 		user2.setEmail("researcher1@naver.com");
 		user2.setPhoneNum("01033334444");
-		user2.setMajor("ÀÀ¿ëÀÎÁö½É¸®");
+		user2.setMajor("ì‘ìš©ì¸ì§€ì‹¬ë¦¬");
 		mapper.Register(user2);
 		///////////////////////////////
 		UserVO user3 = new UserVO();
-		user3.setMemberType("°­»ç"); 
+		user3.setMemberType("ê°•ì‚¬"); 
 		user3.setUserId("instructor1");
 		user3.setUserPw("instructor1");
 		user3.setIdentifiedNum("201899999");
-		user3.setUserName("ÀÌ°­»ç");
+		user3.setUserName("ì´ê°•ì‚¬");
 		user3.setEmail("instructor1@naver.com");
 		user3.setPhoneNum("01055556666");
 		mapper.Register(user3);
 		///////////////////////////////
 		UserVO user4 = new UserVO();
-		user4.setMemberType("Áöµµ±³¼ö"); 
+		user4.setMemberType("ì§€ë„êµìˆ˜"); 
 		user4.setUserId("advisor1");
 		user4.setUserPw("advisor1");
 		user4.setIdentifiedNum("200100011");
-		user4.setUserName("±è°æÀÏ");
+		user4.setUserName("ê¹€ê²½ì¼");
 		user4.setEmail("advisor1@naver.com");
 		user4.setPhoneNum("01099998888");
-		user4.setMajor("ÀÀ¿ëÀÎÁö½É¸®");
+		user4.setMajor("ì‘ìš©ì¸ì§€ì‹¬ë¦¬");
 		mapper.Register(user4);
 	}
 	
@@ -67,25 +67,25 @@ public class UserMapperTest {
 		
 		//String id = "researcher1"; 
 		//String pw = "researcher1";
-		//int type = "´ëÇĞ¿ø»ı";
+		//int type = "ëŒ€í•™ì›ìƒ";
 		String id = "participant1"; 
 		String pw = "participant1";
 		UserVO user = new UserVO();
 		user.setUserId(id);
 		user.setUserPw(pw);
-		user.setMemberType("ÇĞºÎ»ı");
+		user.setMemberType("í•™ë¶€ìƒ");
 		UserVO user2 = mapper.getOneUserInfo(user.getUserId());
-		if(user2 == null) { // ¾ÆÀÌµğµµ ¾øÀ» ¶§
-			System.out.println("ÀÏÄ¡ÇÏ´Â id°¡ ¾ø½À´Ï´Ù." ); // È®ÀÎ ¿Ï·á
-		} else { // ÀÏÄ¡ÇÏ´Â ¾ÆÀÌµğ ÀÖÀ» ¶§
-			if(!user2.getMemberType().equals(user.getMemberType())) { // È¸¿øºĞ·ù°¡ ´Ù¸¦ ¶§
-				System.out.println("È¸¿øºĞ·ù°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù." ); // È®ÀÎ ¿Ï·á
-			} else if(!user2.getUserPw().equals(user.getUserPw())) { // ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾ÊÀ» ¶§
-				System.out.println("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù." ); // È®ÀÎ ¿Ï·á
-			} else if(user2.getPermit() == 0) { // ½ÂÀÎÀÌ ³ªÁö ¾Ê¾ÒÀ» ¶§
-				System.out.println("¾ÆÁ÷ °¡ÀÔ½ÂÀÎµÇÁö ¾ÊÀº »ç¿ëÀÚÀÔ´Ï´Ù." ); // È®ÀÎ ¿Ï·á
+		if(user2 == null) { // ì•„ì´ë””ë„ ì—†ì„ ë•Œ
+			System.out.println("ì¼ì¹˜í•˜ëŠ” idê°€ ì—†ìŠµë‹ˆë‹¤." ); // í™•ì¸ ì™„ë£Œ
+		} else { // ì¼ì¹˜í•˜ëŠ” ì•„ì´ë”” ìˆì„ ë•Œ
+			if(!user2.getMemberType().equals(user.getMemberType())) { // íšŒì›ë¶„ë¥˜ê°€ ë‹¤ë¥¼ ë•Œ
+				System.out.println("íšŒì›ë¶„ë¥˜ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤." ); // í™•ì¸ ì™„ë£Œ
+			} else if(!user2.getUserPw().equals(user.getUserPw())) { // ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•Šì„ ë•Œ
+				System.out.println("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤." ); // í™•ì¸ ì™„ë£Œ
+			} else if(user2.getPermit() == 0) { // ìŠ¹ì¸ì´ ë‚˜ì§€ ì•Šì•˜ì„ ë•Œ
+				System.out.println("ì•„ì§ ê°€ì…ìŠ¹ì¸ë˜ì§€ ì•Šì€ ì‚¬ìš©ìì…ë‹ˆë‹¤." ); // í™•ì¸ ì™„ë£Œ
 			} else {
-				System.out.println("·Î±×ÀÎ¿¡ ¼º°øÇÏ¿´½À´Ï´Ù."); // È®ÀÎ ¿Ï·á
+				System.out.println("ë¡œê·¸ì¸ì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤."); // í™•ì¸ ì™„ë£Œ
 			}
 		}
 	}
@@ -112,9 +112,9 @@ public class UserMapperTest {
 	public void DeleteUserTest() {
 		mapper.DeleteUser("instructor1");
 		if(mapper.getOneUserInfo("instructor1") == null) {
-			System.out.println("»èÁ¦¼º°ø");
+			System.out.println("ì‚­ì œì„±ê³µ");
 		} else {
-			System.out.println("»èÁ¦½ÇÆĞ");
+			System.out.println("ì‚­ì œì‹¤íŒ¨");
 		}
 	}
 	
@@ -134,7 +134,7 @@ public class UserMapperTest {
 	
 	@Test
 	public void getStudentsInfoTest() {
-		List<UserVO> list = mapper.getGStudentsInfo("ÀÀ¿ëÀÎÁö½É¸®");
+		List<UserVO> list = mapper.getGStudentsInfo("ì‘ìš©ì¸ì§€ì‹¬ë¦¬");
 		for(UserVO user : list) {
 			System.out.println(user);
 		}

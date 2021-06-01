@@ -1,4 +1,4 @@
-package com.junhee.researchWeb.research.model;
+package com.junhee.researchWeb.model;
 
 public class ResearchVO {
 	
@@ -8,9 +8,9 @@ public class ResearchVO {
 	private String researchMethod;
 	private String researcher;
 	private String rewardType;
-	private int rewardValue; // ¾ó¸¶ÀÎÁö, ¸îÇĞÁ¡ÀÎÁö
+	private int rewardValue; // ì–¼ë§ˆì¸ì§€, ëª‡í•™ì ì¸ì§€
 	private int takeTime;
-	private String researchType; // ¿ÀÇÁ¶óÀÎ ½ÇÇè, ¿ÀÇÁ¶óÀÎ ¼³¹®, ¿Â¶óÀÎ ½ÇÇè, ¿Â¶óÀÎ ¼³¹®, ±âÅ¸(¿ÀÇÁ¶óÀÎ), ±âÅ¸(¿Â¶óÀÎ)
+	private String researchType; // ì˜¤í”„ë¼ì¸ ì‹¤í—˜, ì˜¤í”„ë¼ì¸ ì„¤ë¬¸, ì˜¨ë¼ì¸ ì‹¤í—˜, ì˜¨ë¼ì¸ ì„¤ë¬¸, ê¸°íƒ€(ì˜¤í”„ë¼ì¸), ê¸°íƒ€(ì˜¨ë¼ì¸)
 	private int permit;
 	
 	public ResearchVO() {
@@ -113,7 +113,7 @@ public class ResearchVO {
 
 	@Override
 	public String toString() {
-		return "¿¬±¸Á¤º¸ [researchId=" + researchId + ", researchTitle=" + researchTitle + ", researchPurpose="
+		return "ì—°êµ¬ì •ë³´ [researchId=" + researchId + ", researchTitle=" + researchTitle + ", researchPurpose="
 				+ researchPurpose + ", researchMethod=" + researchMethod + ", researcher=" + researcher
 				+ ", rewardType=" + rewardType + ", rewardValue=" + rewardValue + ", takeTime=" + takeTime
 				+ ", researchType=" + researchType + ", permit=" + permit + "]";

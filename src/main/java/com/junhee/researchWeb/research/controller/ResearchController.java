@@ -1,28 +1,17 @@
 package com.junhee.researchWeb.research.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.junhee.researchWeb.research.model.ResearchVO;
+import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.research.service.ResearchService;
 
 @Controller
@@ -34,13 +23,34 @@ public class ResearchController {
 	
 	@GetMapping("/register1")
 	public void register1GET() {
-		System.out.println("¿¬±¸ °³¼³ ½ÅÃ»1 ÆäÀÌÁö·Î ÀÌµ¿! GET");
+		System.out.println("ì—°êµ¬ ê°œì„¤ ì‹ ì²­1 í˜ì´ì§€ë¡œ ì´ë™! GET");
 	}
 	
 	@PostMapping("/register1")
 	public String register1Post(@ModelAttribute("rewardType") String rewardType, @ModelAttribute("researchType") String researchType) {
-		System.out.println("¿¬±¸ °³¼³ ½ÅÃ»2 ÆäÀÌÁö·Î ÀÌµ¿! ¿¬±¸ À¯Çü: " + researchType + "º¸»ó À¯Çü: " + rewardType);
+		System.out.println("ì—°êµ¬ ê°œì„¤ ì‹ ì²­2 í˜ì´ì§€ë¡œ ì´ë™! ì—°êµ¬ ìœ í˜•: " + researchType + "ë³´ìƒ ìœ í˜•: " + rewardType);
 		return "research/register2";
+	}
+	
+	@PostMapping("/register2")
+	public String register2Post(ResearchVO rvo, RedirectAttributes ra) {
+		System.out.println("ì—°êµ¬ ê°œì„¤ ìµœì¢… ìš”ì²­.");
+		System.out.println(rvo);
+		service.registerResearch(rvo);
+		ra.addFlashAttribute("msg", "ì—°êµ¬ ê°œì„¤ ì‹ ì²­ ì™„ë£Œ. ì§€ë„ êµìˆ˜ ìŠ¹ì¸ í›„ì— íƒ€ì„ìŠ¬ë¡¯ì„ ì—´ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+		return "redirect:/user/mypage";
+	}
+	
+	@GetMapping("/showMyResearch")
+	public void showMyResearch(Model model, String researcher) {
+		System.out.println("ë‚´ê°€ ê°œì„¤í•œ ì—°êµ¬ ëª©ë¡ ìš”ì²­.");
+		model.addAttribute("myResearchList", service.getMyResearch(researcher));
+	}
+	
+	@GetMapping("/showOneResearch")
+	public void showOneResearch(int researchId, Model model) {
+		System.out.println("ì—°êµ¬ ìƒì„¸ ë³´ê¸° ìš”ì²­.");
+		model.addAttribute("selectedResearch", service.getResearchInfo(researchId));
 	}
 	
 	

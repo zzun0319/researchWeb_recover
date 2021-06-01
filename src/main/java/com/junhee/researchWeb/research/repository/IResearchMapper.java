@@ -2,20 +2,23 @@ package com.junhee.researchWeb.research.repository;
 
 import java.util.List;
 
-import com.junhee.researchWeb.research.model.ResearchVO;
+import com.junhee.researchWeb.model.ResearchVO;
 
 public interface IResearchMapper {
 
-	// ¿¬±¸ °³¼³ ½ÅÃ»
+	// ì—°êµ¬ ê°œì„¤ ì‹ ì²­
 	void registerResearch(ResearchVO rvo);
+	
+	// ë‚´ê°€ ê°œì„¤í•œ ì—°êµ¬ ë³´ê¸°
+	List<ResearchVO> getMyResearch(String researcher);
 		
-	// ¿¬±¸ Á¤º¸ º¸±â
+	// ì—°êµ¬ ìƒì„¸ ë³´ê¸°
 	ResearchVO getResearchInfo(int researchId);
 		
-	// ¸ğµç ¿¬±¸ ¾ò¾î¿À±â
+	// ëª¨ë“  ì—°êµ¬ ë³´ê¸°
 	List<ResearchVO> getAllResearch();
 		
-	// ¿¬±¸ ½ÂÀÎ À§ÇØ Áöµµ±³¼ö Àü°ø°ú °°Àº ´ëÇĞ¿ø»ıÀÇ ¿¬±¸¸¸ ¾ò¾î¿À±â
-	//List<ResearchVO> getSameMajorResearch(String major);
+	// ì—°êµ¬ ìŠ¹ì¸ ìœ„í•´ ì§€ë„êµìˆ˜ ì „ê³µê³¼ ê°™ì€ ëŒ€í•™ì›ìƒì˜ ì—°êµ¬ë§Œ ì–»ì–´ì˜¤ê¸°
+	List<ResearchVO> getSameMajorResearch(String major);
 	
 }

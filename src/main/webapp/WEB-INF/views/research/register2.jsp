@@ -16,17 +16,13 @@
 
 <style type="text/css">
 #rightColumn{
-	width: 100%;
+	width: 80%;
 }
 
 *{padding:0; margin:0}
-html, body, .wrap{width: 100%;}
-.clear{clear:both;}
-.wrap>.fileBox{padding: 20px;}
-.fileBox input, textarea{width: 100%;}
-.fileBox .fileDrop{display: inline-block;width: 700px;height: 75px;border: 1px solid #000;overflow: auto;}
-.fileDrop .fileList .fileName{padding-left: 20px;}
-.fileDrop .fileList .fileSize{padding-right: 20px; float:right;}
+
+input{width: 100%;}
+textarea{width: 100%; height: 100px;}
 
 </style>
 
@@ -50,7 +46,7 @@ html, body, .wrap{width: 100%;}
 	
 	<div class="wrap">
         <div class="fileBox">
-            <form method="post">
+            <form action="/research/register2" method="post">
             <input type="hidden" name="researcher" value="${member.userId}">
             <c:if test="${rewardType != '기타'}">
             	<input type="hidden" name="rewardType" value="${rewardType}">
@@ -59,40 +55,40 @@ html, body, .wrap{width: 100%;}
                 <table border="1">
                     <tr>
                     	<td>연구 제목</td>
-                        <td><input type="text" name="researchTitle"></td>
+                        <td id="rightColumn"><input type="text" name="researchTitle"></td>
                     </tr>
                     <tr>
                     	<td>연구 목적</td>
-                        <td><input type="text" name="researchPurpose"></td>
+                        <td id="rightColumn"><input type="text" name="researchPurpose"></td>
                     </tr>
                     <tr>
                     	<td>연구 방법 및 절차</td>
-                        <td><textarea name="researchMethod"></textarea></td>
+                        <td id="rightColumn"><textarea name="researchMethod"></textarea></td>
                     </tr>
                     <tr>
-                    	<td>소요시간</td>
-                        <td><input type="number" name="takeTime"> 분</td>
+                    	<td>소요시간 (단위: 분)</td>
+                        <td id="rightColumn"><input type="number" name="takeTime"></td>
                         <!-- 학점은 그냥 소요시간으로 알아서 서비스에서 계산해서 넣어버리기 -->
                     </tr>
                     <c:if test="${rewardType=='참가비'}">
                     <tr>
-                    	<td>참가비</td>
-                    	<td><input type="number" name="rewardValue"> 원</td>
+                    	<td>참가비 (단위: 원)</td>
+                    	<td id="rightColumn"><input type="number" name="rewardValue"></td>
                     </tr>
                     </c:if>
                     <c:if test="${rewardType=='기타'}">
                     <tr>
                     	<td>무엇을 (ex 초코파이를)</td>
-                    	<td><input type="text" name="rewardType"></td>
+                    	<td id="rightColumn"><input type="text" name="rewardType"></td>
                     </tr>
                     <tr>
                     	<td>얼마나</td>
-                    	<td><input type="number" name="rewardValue"></td>
+                    	<td id="rightColumn"><input type="number" name="rewardValue"></td>
                     </tr>
                     </c:if>
                 </table>
                 <div class="buttonBox">
-                    <button type="submit" id="save">연구 신청 완료하기</button>
+                    <input type="submit" value="연구 신청 완료" />
                 </div>
             </form>
         </div>

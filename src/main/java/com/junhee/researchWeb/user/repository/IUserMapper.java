@@ -9,33 +9,33 @@ import com.junhee.researchWeb.user.model.UserVO;
 
 public interface IUserMapper {
 
-	// È¸¿ø °¡ÀÔ ±â´É
+	// íšŒì› ê°€ì… ê¸°ëŠ¥
 	void Register(UserVO user);
 	
-	// ·Î±×ÀÎ Ã¼Å© ±â´É (°¡ÀÔ ½ÂÀÎ ¿©ºÎµµ Ã¼Å©ÇØ¾ßÇÔ)
+	// ë¡œê·¸ì¸ ì²´í¬ ê¸°ëŠ¥ (ê°€ì… ìŠ¹ì¸ ì—¬ë¶€ë„ ì²´í¬í•´ì•¼í•¨)
 	UserVO getOneUserInfo(String userId);
 	
-	// È¸¿ø Á¤º¸ ¼öÁ¤ ±â´É
+	// íšŒì› ì •ë³´ ìˆ˜ì • ê¸°ëŠ¥
 	void UpdateUserInfo(UserVO user);
 	
-	// ºñ¹Ğ ¹øÈ£ ¼öÁ¤ ±â´É
+	// ë¹„ë°€ ë²ˆí˜¸ ìˆ˜ì • ê¸°ëŠ¥
 	void UpdatePassword(@Param("userId") String userId, @Param("userPw") String userPw);
-	// MyBatis´Â ÆÄ¶ó¹ÌÅÍ¸¦ 2°³ ÀÌ»ó ¹ŞÀ» ¼ö ¾øÀ½. @Param ¾²°Å³ª Map<String,String> À» ÀÌ¿ëÇØ¼­ ¹Ş°Å³ª, ±×³É °´Ã¼¸¦ ÅëÂ°·Î ¹Ş¾Æ¾ßÇÔ.
+	// MyBatisëŠ” íŒŒë¼ë¯¸í„°ë¥¼ 2ê°œ ì´ìƒ ë°›ì„ ìˆ˜ ì—†ìŒ. @Param ì“°ê±°ë‚˜ Map<String,String> ì„ ì´ìš©í•´ì„œ ë°›ê±°ë‚˜, ê·¸ëƒ¥ ê°ì²´ë¥¼ í†µì§¸ë¡œ ë°›ì•„ì•¼í•¨.
 	
-	// È¸¿ø Å»Åğ ±â´É
+	// íšŒì› íƒˆí‡´ ê¸°ëŠ¥
 	void DeleteUser(String userId);
 	
-	// Àü°ø ¸®½ºÆ®·Î ¾ò¾î¿À±â ±â´É
+	// ì „ê³µ ë¦¬ìŠ¤íŠ¸ë¡œ ì–»ì–´ì˜¤ê¸° ê¸°ëŠ¥
 	List<UserVO> getMajors();
 	
-	// ÇĞ¹ø Áßº¹ È®ÀÎ ±â´É
+	// í•™ë²ˆ ì¤‘ë³µ í™•ì¸ ê¸°ëŠ¥
 	UserVO checkIdNum(String identifiedNum);
 	
-	// Áöµµ±³¼ö - Àü°ø °°Àº ´ëÇĞ¿ø»ı °¡ÀÔ½ÅÃ» ½ÂÀÎÀ§ÇØ ÇĞ»ıÁ¤º¸ °¡Á®¿À±â
+	// ì§€ë„êµìˆ˜ - ì „ê³µ ê°™ì€ ëŒ€í•™ì›ìƒ ê°€ì…ì‹ ì²­ ìŠ¹ì¸ìœ„í•´ í•™ìƒì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	List<UserVO> getGStudentsInfo(String major);
 	
 	void ChangePermit(UserVO user);
 	
-	// È¸¿ø Á¤º¸ Á¶È¸ ±â´É (¾î´À ³¯Â¥¿¡ ´©°¡ ½ÅÃ»Çß´ÂÁö, °¢ ½ÇÇè ½ºÄÉÁÙÀÇ id¸¦ ¹Ş´Â´Ù)
+	// íšŒì› ì •ë³´ ì¡°íšŒ ê¸°ëŠ¥ (ì–´ëŠ ë‚ ì§œì— ëˆ„ê°€ ì‹ ì²­í–ˆëŠ”ì§€, ê° ì‹¤í—˜ ìŠ¤ì¼€ì¤„ì˜ idë¥¼ ë°›ëŠ”ë‹¤)
 	//List<UserVO> GetParticipantList(int researchId);
 }

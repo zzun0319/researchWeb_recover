@@ -4,7 +4,7 @@
     
 <mapper namespace="com.junhee.researchWeb.research.repository.IResearchMapper">
 	
-	<resultMap id="ResearchMap" type="com.junhee.researchWeb.research.model.ResearchVO" >
+	<resultMap id="ResearchMap" type="com.junhee.researchWeb.model.ResearchVO" >
 		<id property="researchId" column="research_id" />
 		<result property="researchTitle" column="research_title" />
 		<result property="researchPurpose" column="research_purpose" />
@@ -22,16 +22,20 @@
 		VALUES (research_seq.NEXTVAL, #{researchTitle}, #{researchPurpose}, #{researchMethod}, #{researcher}, #{rewardType}, #{rewardValue}, #{takeTime}, #{researchType})
 	</insert>
 	
+	<select id="getMyResearch" resultMap="ResearchMap">
+		SELECT * FROM research WHERE researcher=#{researcher}
+	</select>
+	
 	<select id="getResearchInfo" resultMap="ResearchMap">
-		SELECT * FROM research SELECT * FROM research
+		SELECT * FROM research WHERE research_id=#{researchId}
 	</select>
 	
 	<select id="getAllResearch" resultMap="ResearchMap">
-		SELECT * FROM research
+		SELECT * FROM research WHERE permit=1
 	</select>
 	
-	<!-- <select id="getSameMajorResearch" resultMap="ResearchMap">
+	<select id="getSameMajorResearch" resultMap="ResearchMap">
 		SELECT * FROM research A WHERE A.researcher IN (SELECT B.user_id FROM members B WHERE B.major=#{major} AND B.member_type='대학원생')
-	</select> -->
+	</select>
 
 </mapper>

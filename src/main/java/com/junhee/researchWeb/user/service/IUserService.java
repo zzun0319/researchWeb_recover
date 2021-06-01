@@ -6,34 +6,34 @@ import com.junhee.researchWeb.user.model.UserVO;
 
 public interface IUserService {
 	
-	// È¸¿ø °¡ÀÔ ±â´É
+	// íšŒì› ê°€ì… ê¸°ëŠ¥
 	void Register(UserVO user);
 		
-	// ·Î±×ÀÎ Ã¼Å© ±â´É (°¡ÀÔ ½ÂÀÎ ¿©ºÎµµ Ã¼Å©ÇØ¾ßÇÔ)
+	// ë¡œê·¸ì¸ ì²´í¬ ê¸°ëŠ¥ (ê°€ì… ìŠ¹ì¸ ì—¬ë¶€ë„ ì²´í¬í•´ì•¼í•¨)
 	UserVO getOneUserInfo(UserVO user);
 	
-	//·Î±×ÀÎ Ã¼Å© ±â´É
+	//ë¡œê·¸ì¸ ì²´í¬ ê¸°ëŠ¥
 	String getLoginCheckMessage(UserVO user);
 		
-	// È¸¿ø Á¤º¸ ¼öÁ¤ ±â´É
+	// íšŒì› ì •ë³´ ìˆ˜ì • ê¸°ëŠ¥
 	void UpdateUserInfo(UserVO user);
 		
-	// ºñ¹Ğ ¹øÈ£ ¼öÁ¤ ±â´É
+	// ë¹„ë°€ ë²ˆí˜¸ ìˆ˜ì • ê¸°ëŠ¥
 	void UpdatePassword(String userId, String userPw);
 	
-	// È¸¿ø Å»Åğ ±â´É
+	// íšŒì› íƒˆí‡´ ê¸°ëŠ¥
 	void DeleteUser(String userId);
 	
-	// Àü°ø ¸®½ºÆ® °¡Á®¿À±â
+	// ì „ê³µ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 	List<String> getMajors();
 	
-	// ÇĞ¹ø Áßº¹ Ã¼Å©
+	// í•™ë²ˆ ì¤‘ë³µ ì²´í¬
 	String checkIdNum(String identifiedNum);
 	
-	// ´ëÇĞ¿ø»ı ¸®½ºÆ® ¹İÈ¯
+	// ëŒ€í•™ì›ìƒ ë¦¬ìŠ¤íŠ¸ ë°˜í™˜
 	List<UserVO> getGStudentsInfo(String major);
 	
-	// °¡ÀÔ Çã°¡ º¯°æ
+	// ê°€ì… í—ˆê°€ ë³€ê²½
 	void ChangePermit(List<UserVO> uList);
 	
 }

@@ -12,11 +12,19 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="<c:url value="/css/styles.css" />" rel="stylesheet" />
 <script type="text/javascript" src="<c:url value="/js/jquery-3.5.1.js" />"></script>
+<script type="text/javascript" src="<c:url value="/js/jQuery.form.min.js" />"></script>
 
 <style type="text/css">
 #rightColumn{
-	width: 100%;
+	width: 80%;
 }
+
+*{padding:0; margin:0}
+
+input{width: 100%;}
+textarea{width: 100%; height: 100px;}
+
+td{width:40%;}
 
 </style>
 
@@ -38,38 +46,28 @@
 
 	<jsp:include page="../include/header.jsp" />
 	
-		<form method="post">
-		
+		<p><h2>나의 연구들</h2></p>
+		<p>
+			<c:if test="${myResearchList == null}">
+				개설 신청한 연구가 없습니다.
+			</c:if>
+			<c:if test="${myResearchList != null}">
 			<table border="1">
 				<tr>
-					<td>연구 유형</td>
-					<td>
-						<select name="researchType">
-							<option>=== 유형 선택 ===</option>
-							<option value="오프라인 실험">오프라인 실험</option>
-							<option value="오프라인 설문">오프라인 설문</option>
-							<option value="기타(오프라인)">기타(오프라인)</option>
-							<option value="온라인 실험">온라인 실험</option>
-							<option value="온라인 설문">온라인 설문</option>
-							<option value="기타(온라인)">기타(온라인)</option>
-						</select>
-					</td>
+					<td><b>연구제목</b></td>
+					<td><b>상태</b></td>
+					<td><b>스케줄 보기</b></td>
 				</tr>
-				<tr>
-					<td>보상 방법</td>
-					<td>
-						<input type="radio" name="rewardType" value="학점"> 학점 <br>
-						<input type="radio" name="rewardType" value="참가비"> 참가비 <br>
-						<input type="radio" name="rewardType" value="기타"> 기타 <br>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit" value="계속"></td>
-				</tr>
+				<c:forEach var="research" items="${myResearchList}">
+					<tr>
+						<td><a href="/research/showOneResearch?researchId=${research.researchId}">${research.researchTitle}</a></td>
+						<td>${research.permit == 0 ? "승인 대기 중" : research.permit == 1 ? "승인 완료" : "미승인"}</td>
+						<td>${research.permit == 1 ? "스케줄 보기" : ""}</td>
+					</tr>
+				</c:forEach>
 			</table>
-			
-		
-		</form>
+			</c:if>
+		</p>
 	
 	<jsp:include page="../include/footer.jsp" />
 
