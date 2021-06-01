@@ -37,7 +37,7 @@ td{width:40%;}
 			location.href="/user/login";
 		</script>
 	</c:if>
-	<c:if test="${member.memberType == '학부생' || member.memberType == '강사'}">
+	<c:if test="${member.memberType == '강사'}">
 		<script>
 			alert("접근 권한이 없습니다.");
 			location.href="/user/login";
@@ -57,6 +57,9 @@ td{width:40%;}
 	 </c:if>
 	 <c:if test="${member.memberType == '지도교수'}">
 	 	&nbsp;&nbsp;&nbsp;&nbsp;<a href="/research/acceptResearch?major=${member.major}"> 뒤로 가기 </a>
+	 </c:if>
+	 <c:if test="${member.memberType == '학부생'}">
+	 	&nbsp;&nbsp;&nbsp;&nbsp;<a href="/research/showAllResearch"> 뒤로 가기 </a>
 	 </c:if>
 	 
 	<jsp:include page="../include/footer.jsp" />

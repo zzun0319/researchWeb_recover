@@ -75,4 +75,10 @@ public class ResearchController {
 		return "redirect:/user/mypage";
 	}
 	
+	@GetMapping("/showAllResearch")
+	public void showAllResearch(Model model) {
+		System.out.println("승인된 모든 연구 보기 요청");
+		model.addAttribute("allResearch", service.getAllResearch());
+	}
+	
 }

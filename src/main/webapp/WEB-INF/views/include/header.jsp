@@ -38,7 +38,7 @@
                 <c:if test="${member != null}">
                 	<c:choose>
                         <c:when test="${member.memberType == '학부생'}">
-                        	<a href="#" style="color:white;">연구 참여 신청하기</a> <br>
+                        	<a href="/research/showAllResearch" style="color:white;">연구 참여 신청하기</a> <br>
                         </c:when>
                         <c:when test="${member.memberType == '대학원생'}">
                         	<a href="/research/register1" style="color:white;">연구 개설 신청하기</a> <br>
