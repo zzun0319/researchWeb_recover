@@ -31,7 +31,7 @@
 	</c:if>
 	<c:if test="${member.memberType == '지도교수'}">
 		<input type="button" value="가입 승인하기" onclick="location.href='/user/acceptResearcher?major=${member.major}'"><br>
-		<input type="button" value="개설 연구 승인하기" onclick="location.href='#'"><br>
+		<input type="button" value="개설 연구 승인하기" onclick="location.href='/research/acceptResearch?major=${member.major}'"><br>
 	</c:if>
 	
 		<input type="button" value="회원정보 수정" onclick="location.href='/user/updateInfo'"><br>

@@ -37,17 +37,28 @@ td{width:40%;}
 			location.href="/user/login";
 		</script>
 	</c:if>
-	<c:if test="${member.memberType != '대학원생'}">
+	<c:if test="${member.memberType == '학부생' || member.memberType == '강사'}">
 		<script>
-			alert("대학원생이 아닙니다.");
+			alert("접근 권한이 없습니다.");
 			location.href="/user/login";
 		</script>
 	</c:if>
 
-	<jsp:include page="../include/header.jsp" />
+	<jsp:include page="../include/header.jsp" /> <!-- 연구자, 학부생은 상세보기 창이 달라야하네.. -->
 	<h2>${selectedResearch.researchTitle}</h2>
-	
-	
+	 - 연구 종류: ${selectedResearch.researchType} <br>
+	 - 연구 목적: ${selectedResearch.researchPurpose} <br>
+	 - 소요 시간: ${selectedResearch.takeTime} <br>
+	 - 보상 종류: ${selectedResearch.rewardType} <br>
+	 - 보상: ${selectedResearch.rewardValue} ${selectedResearch.rewardType == "학점" ?  "점" : selectedResearch.rewardType == "참가비" ? "원" : "개"}<br>
+	 <br>
+	 <c:if test="${member.memberType == '대학원생'}">
+	 	&nbsp;&nbsp;&nbsp;&nbsp;<a href="/research/showMyResearch?researcher=${selectedResearch.researcher}"> 뒤로 가기 </a>
+	 </c:if>
+	 <c:if test="${member.memberType == '지도교수'}">
+	 	&nbsp;&nbsp;&nbsp;&nbsp;<a href="/research/acceptResearch?major=${member.major}"> 뒤로 가기 </a>
+	 </c:if>
+	 
 	<jsp:include page="../include/footer.jsp" />
 
 </body>

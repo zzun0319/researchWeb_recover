@@ -21,4 +21,6 @@ public interface IResearchMapper {
 	// 연구 승인 위해 지도교수 전공과 같은 대학원생의 연구만 얻어오기
 	List<ResearchVO> getSameMajorResearch(String major);
 	
+	// 연구 승인 상태 변경
+	void ChangePermitStatus(ResearchVO rvo);
 }

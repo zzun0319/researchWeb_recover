@@ -90,4 +90,13 @@ public class ResearchMapperTest {
 		}
 	}
 	
+	@Test
+	public void changePermitTest() {
+		ResearchVO rvo = new ResearchVO();
+		rvo.setPermit(1);
+		rvo.setResearchId(2);
+		mapper.ChangePermitStatus(rvo);
+		System.out.println(mapper.getResearchInfo(rvo.getResearchId()));
+	}
+	
 }

@@ -37,5 +37,9 @@
 	<select id="getSameMajorResearch" resultMap="ResearchMap">
 		SELECT * FROM research A WHERE A.researcher IN (SELECT B.user_id FROM members B WHERE B.major=#{major} AND B.member_type='대학원생')
 	</select>
+	
+	<update id="ChangePermitStatus">
+		UPDATE research SET permit=#{permit} WHERE research_id=#{researchId}
+	</update>
 
 </mapper>

@@ -50,4 +50,12 @@ public class ResearchService implements IResearchService {
 		return mapper.getSameMajorResearch(major);
 	}
 
+	@Override
+	public void ChangePermitStatus(List<ResearchVO> researchList) {
+		for(ResearchVO rvo : researchList) {
+			mapper.ChangePermitStatus(rvo);	
+		}
+		
+	}
+
 }

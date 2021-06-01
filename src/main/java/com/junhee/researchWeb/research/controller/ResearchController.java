@@ -2,6 +2,8 @@ package com.junhee.researchWeb.research.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.junhee.researchWeb.model.ResearchListVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.research.service.ResearchService;
+import com.junhee.researchWeb.user.model.UserVO;
 
 @Controller
 @RequestMapping("/research")
@@ -53,5 +57,22 @@ public class ResearchController {
 		model.addAttribute("selectedResearch", service.getResearchInfo(researchId));
 	}
 	
+	@GetMapping("/acceptResearch")
+	public void acceptResearchPage(String major, Model model) {
+		System.out.println("지도교수 밑에 있는 대학원생들의 개설된 연구 목록 요청");
+		model.addAttribute("registedResearchList", service.getSameMajorResearch(major));
+	}
+	
+	@PostMapping("/acceptResearch2")
+	public String AcceptResearch(ResearchListVO researchList, String major, RedirectAttributes ra) {
+		System.out.println("개설 연구 승인 상태 변경 요청 / major: " + major);
+		List<ResearchVO> rList = researchList.getrList();
+		for(ResearchVO r : rList) {
+			System.out.println(r);
+		}
+		service.ChangePermitStatus(rList);;
+		ra.addFlashAttribute("msg", "개설 연구 승인 정보가 변경되었습니다.");
+		return "redirect:/user/mypage";
+	}
 	
 }

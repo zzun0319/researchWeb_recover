@@ -123,7 +123,7 @@ public class UserController {
 	
 	@GetMapping("/acceptResearcher")
 	public String acceptResearcher1(@RequestParam("major") String major, Model m) {
-		System.out.println("���п��� ����Ʈ ��û�� ����" + major);
+		System.out.println("대학원생 가입 승인 요청 페이지" + major);
 		m.addAttribute("GStudentList", service.getGStudentsInfo(major));
 		return "user/acceptResearcher";
 	}
