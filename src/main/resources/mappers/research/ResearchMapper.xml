@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.junhee.researchWeb.research.repository.IResearchMapper">
+	
+	<resultMap id="ResearchMap" type="com.junhee.researchWeb.research.model.ResearchVO" >
+		<id property="researchId" column="research_id" />
+		<result property="researchTitle" column="research_title" />
+		<result property="researchPurpose" column="research_purpose" />
+		<result property="researchMethod" column="research_method" />
+		<result property="researcher" column="researcher" />
+		<result property="rewardType" column="reward_type" />
+		<result property="rewardValue" column="reward_value" />
+		<result property="takeTime" column="take_time" />
+		<result property="researchType" column="research_type" />
+		<result property="permit" column="permit" />
+	</resultMap>
+	
+	<insert id="registerResearch">
+		INSERT INTO research (research_id, research_title, research_purpose, research_method, researcher, reward_type, reward_value, take_time, research_type) 
+		VALUES (research_seq.NEXTVAL, #{researchTitle}, #{researchPurpose}, #{researchMethod}, #{researcher}, #{rewardType}, #{rewardValue}, #{takeTime}, #{researchType})
+	</insert>
+	
+	<select id="getResearchInfo" resultMap="ResearchMap">
+		SELECT * FROM research SELECT * FROM research
+	</select>
+	
+	<select id="getAllResearch" resultMap="ResearchMap">
+		SELECT * FROM research
+	</select>
+	
+	<!-- <select id="getSameMajorResearch" resultMap="ResearchMap">
+		SELECT * FROM research A WHERE A.researcher IN (SELECT B.user_id FROM members B WHERE B.major=#{major} AND B.member_type='대학원생')
+	</select> -->
+
+</mapper>

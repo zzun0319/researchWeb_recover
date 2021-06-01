@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.junhee.researchWeb.user.repository.IUserMapper">
+
+	<resultMap id="UserMap" type="com.junhee.researchWeb.user.model.UserVO" >
+		<id property="userId" column="user_id" />
+		<result property="memberType" column="member_type" />
+		<result property="userPw" column="user_pw" />
+		<result property="identifiedNum" column="identified_num" />
+		<result property="userName" column="user_name" />
+		<result property="email" column="email" />
+		<result property="phoneNum" column="phone_num" />
+		<result property="permit" column="permit" />
+		<result property="major" column="major" />
+	</resultMap>
+
+	<sql id="join"> <!-- 회원 타입에 따라 넣어야할 값들이 다르기 때문에 사용 -->
+		<if test="memberType=='학부생'">
+			INSERT INTO members (member_type, user_id, user_pw, identified_num, user_name, email, phone_num, permit) 
+		VALUES (#{memberType},#{userId},#{userPw},#{identifiedNum},#{userName},#{email},#{phoneNum}, 1)
+		</if>
+		<if test="memberType=='대학원생' || memberType=='지도교수'">
+			INSERT INTO members (member_type, user_id, user_pw, identified_num, user_name, email, phone_num, major) 
+		VALUES (#{memberType},#{userId},#{userPw},#{identifiedNum},#{userName},#{email},#{phoneNum}, #{major})
+		</if>
+		<if test="memberType=='강사'">
+			INSERT INTO members (member_type, user_id, user_pw, identified_num, user_name, email, phone_num) 
+		VALUES (#{memberType},#{userId},#{userPw},#{identifiedNum},#{userName},#{email},#{phoneNum})
+		</if>
+	</sql>
+
+	<insert id="Register">
+		<include refid="join" />
+	</insert>
+	
+	<select id="getOneUserInfo" resultMap="UserMap"> 
+	<!-- 이걸로 타입, pw, 승인여부 받아서 service 객체가 일치하는 id가 아예 없는지, 있는데 회원분류가 다른지, 비밀번호가 다른지, 승인이 났는지 판단해서 서비스는 int를 반환하도록 -->
+		SELECT * FROM members WHERE user_id=#{userId} 
+	</select>
+	
+	<update id="UpdateUserInfo">
+		UPDATE members SET email=#{email}, phone_num=#{phoneNum} WHERE user_id=#{userId}
+	</update>
+	
+	<update id="UpdatePassword" parameterType="String">
+		UPDATE members SET user_pw=#{userPw} WHERE user_id=#{userId}
+	</update>
+	
+	<delete id="DeleteUser">
+		DELETE FROM members WHERE user_id=#{userId}
+	</delete>
+	
+	<select id="getMajors" resultMap="UserMap">
+		SELECT * FROM members WHERE member_type='지도교수'
+	</select>
+	
+	<select id="checkIdNum" resultMap="UserMap">
+		SELECT * FROM members WHERE identified_num=#{identifiedNum}
+	</select>
+	
+	<select id="getGStudentsInfo" resultMap="UserMap">
+		SELECT * FROM members WHERE major=#{major} AND member_type='대학원생'ORDER BY user_name ASC
+	</select>
+	
+	<update id="ChangePermit">
+		UPDATE members SET permit=#{permit} WHERE identified_num=#{identifiedNum}
+	</update>
+	
+    
+</mapper>
