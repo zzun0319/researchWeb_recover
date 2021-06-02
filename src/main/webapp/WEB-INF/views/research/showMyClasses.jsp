@@ -39,27 +39,24 @@ input{width:100%;}
 	</c:if>
 
 	<jsp:include page="../include/header.jsp" />
-		<h2> 연구 참여 과목 신청하기 </h2>
-		<form action="/research/addClassForResearch" method="post">
-		
-			<input type="hidden" name="teacherName" value="${member.userName}">
-			<input type="hidden" name="teacherId" value="${member.userId}">
-			<table border="1">
-				<tr>
-					<td>과목명</td> <!-- 여기 JS로 중복 검사 걸어야해.. -->
-					<td id="rightColumn"><input name="className" placeholder="과목명을 입력해주세요."></td>
-				</tr>
-				<tr>
-					<td>시간표</td>
-					<td id="rightColumn"><input name="classSchedule" placeholder="예) 월D목D"></td>
-				</tr>
-				<tr>
-					<td>채워야 할 연구 학점</td>
-					<td><input type="number" name="needCredit" placeholder="학생들이 채워야 할 총 연구학점을 입력해주세요."></td>
-				</tr>
-			</table>
-			<input type="submit" value="연구 참여 과목 추가하기">
-		</form>
+		<h2>[연구 참여 중인 과목]</h2>
+		<c:if test="${myClasses == null}">
+			연구 참여 중인 과목이 없습니다. <br>
+		</c:if>
+		<c:if test="${myClasses != null}">
+		<table border="1">
+			<tr>
+				<td>과목명</td>
+				<td>삭제하기</td>
+			</tr>
+			<c:forEach var="myClass" items="${myClasses}">
+			<tr>
+				<td>${myClass.className}, ${myClass.classSchedule}</td>
+				<td><button onclick="location.href='/research/DeleteClass?classId=${myClass.classId}&teacherId=${myClass.teacherId}'">삭제</button></td>
+			</tr>
+			</c:forEach>
+		</table>
+		</c:if>
 	<jsp:include page="../include/footer.jsp" />
 
 </body>

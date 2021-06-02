@@ -27,4 +27,10 @@ public interface IResearchService {
 	
 	// 연구 참여 과목 등록
 	void registerClass(ClassVO cvo);
+	
+	// 자신의 연구참여 과목 리스트 보기
+	List<ClassVO> getMyClasses(String teacherId);
+	
+	// 연구 참여 과목 삭제
+	void deleteClass(ClassVO cvo);
 }

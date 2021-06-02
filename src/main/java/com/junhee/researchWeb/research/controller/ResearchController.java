@@ -95,4 +95,18 @@ public class ResearchController {
 		ra.addFlashAttribute("msg", "연구 참여 과목으로 등록되었습니다.");
 		return "redirect:/user/mypage";
 	}
+	
+	@GetMapping("/showMyClasses")
+	public void showMyClass(String teacherId, Model model) {
+		model.addAttribute("myClasses", service.getMyClasses(teacherId));
+	}
+	
+	@GetMapping("/DeleteClass")
+	public String deleteClass(ClassVO cvo) {
+		System.out.println("다음 과목의 연구참여과목리스트 삭제 요청이 들어옴, 과목번호: " + cvo.getClassId());
+		service.deleteClass(cvo);
+		return "redirect:/research/showMyClasses?teacherId=" + cvo.getTeacherId();
+	}
+	
+	
 }

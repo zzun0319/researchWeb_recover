@@ -31,7 +31,7 @@
 		<input type="button" value="예약 중인 장소 보기" onclick="location.href='#'"><br>
 	</c:if>
 	<c:if test="${member.memberType == '강사' || member.memberType == '지도교수'}">
-		<input type="button" value="연구 참여 중인 과목 보기" onclick="location.href='#'"><br>
+		<input type="button" value="연구 참여 중인 과목 보기" onclick="location.href='/research/showMyClasses?teacherId=${member.userId}'"><br>
 	</c:if>
 	<c:if test="${member.memberType == '지도교수'}">
 		<input type="button" value="가입 승인하기" onclick="location.href='/user/acceptResearcher?major=${member.major}'"><br>

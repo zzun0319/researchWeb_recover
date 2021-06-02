@@ -64,4 +64,14 @@ public class ResearchService implements IResearchService {
 		mapper.registerClass(cvo);
 	}
 
+	@Override
+	public List<ClassVO> getMyClasses(String teacherId) {
+		return mapper.getMyClasses(teacherId);
+	}
+
+	@Override
+	public void deleteClass(ClassVO cvo) {
+		mapper.deleteClass(cvo);
+	}
+
 }

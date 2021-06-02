@@ -54,5 +54,13 @@
 	<insert id="registerClass">
 		INSERT INTO classes (class_id, teacher_name, teacher_id, class_name, class_schedule, need_credit) VALUES (class_seq.NEXTVAL, #{teacherName}, #{teacherId}, #{className}, #{classSchedule}, #{needCredit})
 	</insert>
+	
+	<select id="getMyClasses" resultMap="ClassMap">
+		SELECT * FROM classes WHERE teacher_id=#{teacherId}
+	</select>
+	
+	<delete id="deleteClass">
+		DELETE FROM classes WHERE class_id=#{classId} AND teacher_id=#{teacherId}
+	</delete>
 
 </mapper>

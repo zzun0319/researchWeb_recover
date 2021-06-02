@@ -111,4 +111,26 @@ public class ResearchMapperTest {
 		mapper.registerClass(cvo);
 	}
 	
+	@Test
+	public void getMyClassesTest() {
+		for(ClassVO cvo : mapper.getMyClasses("teacher1")) {
+			System.out.println(cvo);
+		}
+	}
+	
+	@Test
+	public void deleteClassTest() {
+		for(ClassVO cvo : mapper.getMyClasses("teacher1")) {
+			System.out.println(cvo);
+		}
+		System.out.println("삭제");
+		ClassVO cvo2 = new ClassVO();
+		cvo2.setClassId(2);
+		cvo2.setTeacherId("teacher1");
+		mapper.deleteClass(cvo2);
+		for(ClassVO cvo : mapper.getMyClasses("teacher1")) {
+			System.out.println(cvo);
+		}
+	}
+	
 }
