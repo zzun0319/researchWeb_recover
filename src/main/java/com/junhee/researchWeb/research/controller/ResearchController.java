@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchListVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.research.service.ResearchService;
@@ -81,4 +82,17 @@ public class ResearchController {
 		model.addAttribute("allResearch", service.getAllResearch());
 	}
 	
+	@GetMapping("/addClassForResearch")
+	public void addClassPage(){
+		System.out.println("연구 참여 과목 등록 페이지로 이동");
+	}
+	
+	@PostMapping("/addClassForResearch")
+	public String addClassForResearch(ClassVO cvo, RedirectAttributes ra) {
+		System.out.println("다음 수업을 연구 참여 과목으로 등록");
+		System.out.println(cvo);
+		service.registerClass(cvo);
+		ra.addFlashAttribute("msg", "연구 참여 과목으로 등록되었습니다.");
+		return "redirect:/user/mypage";
+	}
 }

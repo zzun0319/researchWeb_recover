@@ -2,6 +2,7 @@ package com.junhee.researchWeb.research.service;
 
 import java.util.List;
 
+import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchVO;
 
 public interface IResearchService {
@@ -24,4 +25,6 @@ public interface IResearchService {
 	// 연구 승인 상태 변경
 	void ChangePermitStatus(List<ResearchVO> researchList);
 	
+	// 연구 참여 과목 등록
+	void registerClass(ClassVO cvo);
 }

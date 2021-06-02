@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.research.repository.IResearchMapper;
 
@@ -56,6 +57,11 @@ public class ResearchService implements IResearchService {
 			mapper.ChangePermitStatus(rvo);	
 		}
 		
+	}
+
+	@Override
+	public void registerClass(ClassVO cvo) {
+		mapper.registerClass(cvo);
 	}
 
 }

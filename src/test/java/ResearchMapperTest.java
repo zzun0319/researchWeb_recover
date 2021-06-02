@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.research.repository.IResearchMapper;
 
@@ -97,6 +98,17 @@ public class ResearchMapperTest {
 		rvo.setResearchId(2);
 		mapper.ChangePermitStatus(rvo);
 		System.out.println(mapper.getResearchInfo(rvo.getResearchId()));
+	}
+	
+	@Test
+	public void registerClassTest() {
+		ClassVO cvo = new ClassVO();
+		cvo.setClassName("우주의 세계");
+		cvo.setClassSchedule("월E수E");
+		cvo.setNeedCredit(20);
+		cvo.setTeacherId("teacher1");
+		cvo.setTeacherName("박선생");
+		mapper.registerClass(cvo);
 	}
 	
 }

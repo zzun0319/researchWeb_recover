@@ -17,6 +17,15 @@
 		<result property="permit" column="permit" />
 	</resultMap>
 	
+	<resultMap id="ClassMap" type="com.junhee.researchWeb.model.ClassVO" >
+		<id property="classId" column="class_id" />
+		<result property="teacherName" column="teacher_name"/>
+		<result property="teacherId" column="teacher_id"/>
+		<result property="className" column="class_name"/>
+		<result property="classSchedule" column="class_schedule"/>
+		<result property="needCredit" column="need_credit"/>
+	</resultMap>
+	
 	<insert id="registerResearch">
 		INSERT INTO research (research_id, research_title, research_purpose, research_method, researcher, reward_type, reward_value, take_time, research_type) 
 		VALUES (research_seq.NEXTVAL, #{researchTitle}, #{researchPurpose}, #{researchMethod}, #{researcher}, #{rewardType}, #{rewardValue}, #{takeTime}, #{researchType})
@@ -41,5 +50,9 @@
 	<update id="ChangePermitStatus">
 		UPDATE research SET permit=#{permit} WHERE research_id=#{researchId}
 	</update>
+	
+	<insert id="registerClass">
+		INSERT INTO classes (class_id, teacher_name, teacher_id, class_name, class_schedule, need_credit) VALUES (class_seq.NEXTVAL, #{teacherName}, #{teacherId}, #{className}, #{classSchedule}, #{needCredit})
+	</insert>
 
 </mapper>

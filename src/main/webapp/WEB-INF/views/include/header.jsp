@@ -45,7 +45,7 @@
                        		<a href="#" style="color:white;">연구 목적 외 장소 예약하기</a> <br>                    		
                         </c:when>
                         <c:otherwise>
-                         	<a href="#" style="color:white;">연구 참여 과목 설정하기</a> <br>  
+                         	<a href="/research/addClassForResearch" style="color:white;">연구 참여 과목 설정하기</a> <br>  
                        		<a href="#" style="color:white;">연구 참여 점수 출력하기</a> <br>                         		
                        	</c:otherwise>
                     </c:choose>
