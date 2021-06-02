@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchVO;
+import com.junhee.researchWeb.model.TakingClassVO;
 import com.junhee.researchWeb.research.repository.IResearchMapper;
 
 @Service
@@ -72,6 +73,28 @@ public class ResearchService implements IResearchService {
 	@Override
 	public void deleteClass(ClassVO cvo) {
 		mapper.deleteClass(cvo);
+	}
+
+	@Override
+	public List<ClassVO> getAllClassList() {
+		return mapper.getAllClassList();
+	}
+
+	@Override
+	public void insertClassStudentPair(TakingClassVO tcvo) {
+		ClassVO tmp = mapper.getClassInfo(tcvo.getClassId());
+		tcvo.setRequiredCredit(tmp.getNeedCredit()); // 필요 연구학점을 넣어줘야 함.
+		mapper.insertClassStudentPair(tcvo);
+	}
+
+	@Override
+	public ClassVO getClassInfo(int classId) {
+		return mapper.getClassInfo(classId);
+	}
+
+	@Override
+	public List<TakingClassVO> getTakingClassList(String studentId) {
+		return mapper.getTakingClassList(studentId);
 	}
 
 }

@@ -23,7 +23,7 @@
 
 	<jsp:include page="../include/header.jsp" />
 	<c:if test="${member.memberType == '학부생'}">
-		<input type="button" value="수강 과목 등록" onclick="location.href='#'"><br>
+		<input type="button" value="수강 과목 등록" onclick="location.href='/research/studentAddClass?studentId=${member.userId}'"><br>
 		<input type="button" value="나의 연구 참여 신청 현황" onclick="location.href='#'"><br>
 	</c:if>
 	<c:if test="${member.memberType == '대학원생'}">

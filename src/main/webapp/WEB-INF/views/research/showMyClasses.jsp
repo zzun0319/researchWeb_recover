@@ -52,10 +52,12 @@ input{width:100%;}
 			<c:forEach var="myClass" items="${myClasses}">
 			<tr>
 				<td>${myClass.className}, ${myClass.classSchedule}</td>
-				<td><button onclick="location.href='/research/DeleteClass?classId=${myClass.classId}&teacherId=${myClass.teacherId}'">삭제</button></td>
+				<td><button style="background-color:red; color:white;" onclick="location.href='/research/DeleteClass?classId=${myClass.classId}&teacherId=${myClass.teacherId}'">삭제</button></td>
 			</tr>
 			</c:forEach>
 		</table>
+		
+		<input type="button" onclick="location.href='/research/addClassForResearch'" value="연구 참여 과목 추가하기">
 		</c:if>
 	<jsp:include page="../include/footer.jsp" />
 

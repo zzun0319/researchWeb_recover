@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchListVO;
 import com.junhee.researchWeb.model.ResearchVO;
+import com.junhee.researchWeb.model.TakingClassVO;
 import com.junhee.researchWeb.research.service.ResearchService;
 import com.junhee.researchWeb.user.model.UserVO;
 
@@ -106,6 +107,20 @@ public class ResearchController {
 		System.out.println("다음 과목의 연구참여과목리스트 삭제 요청이 들어옴, 과목번호: " + cvo.getClassId());
 		service.deleteClass(cvo);
 		return "redirect:/research/showMyClasses?teacherId=" + cvo.getTeacherId();
+	}
+	
+	@GetMapping("/studentAddClass")
+	public void studentAddClassPage(String studentId, Model model) {
+		System.out.println("수강 과목 추가 페이지 이동");
+		model.addAttribute("allClasses", service.getAllClassList());
+		model.addAttribute("takingClasses", service.getTakingClassList(studentId));
+	}
+	
+	@PostMapping("/studentAddClass")
+	public String studentAddClass(TakingClassVO tcvo) {
+		System.out.println("수강 과목 등록 요청");
+		service.insertClassStudentPair(tcvo);
+		return "redirect:/research/studentAddClass?studentId=" + tcvo.getStudentId();
 	}
 	
 	

@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchVO;
+import com.junhee.researchWeb.model.TakingClassVO;
 import com.junhee.researchWeb.research.repository.IResearchMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -130,6 +131,24 @@ public class ResearchMapperTest {
 		mapper.deleteClass(cvo2);
 		for(ClassVO cvo : mapper.getMyClasses("teacher1")) {
 			System.out.println(cvo);
+		}
+	}
+	
+	@Test
+	public void insertClassStudentPairTest() {
+		TakingClassVO tcvo = new TakingClassVO();
+		tcvo.setClassId(7);
+		tcvo.setRequiredCredit(mapper.getClassInfo(7).getNeedCredit());
+		tcvo.setStudentId("abc1234");
+		tcvo.setStudentName("김준");
+		mapper.insertClassStudentPair(tcvo);
+	}
+	
+	@Test
+	public void getTakingClassListTest() {
+		
+		for(TakingClassVO tcvo : mapper.getTakingClassList("abc1234")) {
+			System.out.println(tcvo);
 		}
 	}
 	

@@ -26,6 +26,15 @@
 		<result property="needCredit" column="need_credit"/>
 	</resultMap>
 	
+	<resultMap id="TakingClassMap" type="com.junhee.researchWeb.model.TakingClassVO">
+		<id property="pairNumber" column="pair_number" />
+		<result property="studentId" column="student_id"/>
+		<result property="studentName" column="student_name"/>
+		<result property="classId" column="class_id"/>
+		<result property="requiredCredit" column="required_credit"/>
+		<result property="fillCredit" column="fill_credit"/>
+	</resultMap>
+	
 	<insert id="registerResearch">
 		INSERT INTO research (research_id, research_title, research_purpose, research_method, researcher, reward_type, reward_value, take_time, research_type) 
 		VALUES (research_seq.NEXTVAL, #{researchTitle}, #{researchPurpose}, #{researchMethod}, #{researcher}, #{rewardType}, #{rewardValue}, #{takeTime}, #{researchType})
@@ -62,5 +71,21 @@
 	<delete id="deleteClass">
 		DELETE FROM classes WHERE class_id=#{classId} AND teacher_id=#{teacherId}
 	</delete>
+	
+	<select id="getAllClassList" resultMap="ClassMap">
+		SELECT * FROM classes
+	</select>
+	
+	<insert id="insertClassStudentPair">
+		INSERT INTO taking_class (pair_number, student_id, student_name, class_id, required_credit) VALUES (pairNum_seq.NEXTVAL, #{studentId}, #{studentName}, #{classId}, #{requiredCredit})
+	</insert>
+	
+	<select id="getClassInfo" resultMap="ClassMap">
+		SELECT * FROM classes WHERE class_id=#{classId}
+	</select>
+	
+	<select id="getTakingClassList" resultMap="TakingClassMap">
+		SELECT * FROM taking_class WHERE student_id=#{studentId}
+	</select>
 
 </mapper>

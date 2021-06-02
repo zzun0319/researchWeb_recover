@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchVO;
+import com.junhee.researchWeb.model.TakingClassVO;
 
 public interface IResearchMapper {
 
@@ -33,4 +34,16 @@ public interface IResearchMapper {
 	
 	// 연구 참여 과목 삭제
 	void deleteClass(ClassVO cvo);
+	
+	// 모든 연구참여 과목 리스트 보기
+	List<ClassVO> getAllClassList();
+	
+	// 수강 과목 추가
+	void insertClassStudentPair(TakingClassVO tcvo);
+	
+	// 클래스 정보 얻기
+	ClassVO getClassInfo(int classId);
+	
+	// 수강 중인 클래스 정보 얻기
+	List<TakingClassVO> getTakingClassList(String studentId);
 }
