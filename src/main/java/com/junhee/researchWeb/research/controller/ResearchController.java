@@ -130,5 +130,15 @@ public class ResearchController {
 		return "redirect:/research/studentAddClass?studentId=" + tcvo.getStudentId();
 	}
 	
+	@GetMapping("/makeTimeSlot")
+	public void makeTimeSlotPage(String researchId) {
+		
+	}
+	
+	@GetMapping("/pickTimeSlot")
+	public void pickTimeSlotPage(int researchId) {
+		System.out.println("연구 번호 " + researchId + "의 스케줄 보기");
+	}
+	
 	
 }

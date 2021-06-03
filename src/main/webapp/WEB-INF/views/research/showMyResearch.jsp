@@ -48,10 +48,10 @@ td{width:40%;}
 	
 		<p><h2>나의 연구들</h2></p>
 		<p>
-			<c:if test="${myResearchList == null}">
+			<c:if test="${myResearchList.size() == 0}">
 				개설 신청한 연구가 없습니다.
 			</c:if>
-			<c:if test="${myResearchList != null}">
+			<c:if test="${myResearchList.size() > 0}">
 			<table border="1">
 				<tr>
 					<td><b>연구제목</b></td>
@@ -62,7 +62,7 @@ td{width:40%;}
 					<tr>
 						<td><a href="/research/showOneResearch?researchId=${research.researchId}">${research.researchTitle}</a></td>
 						<td>${research.permit == 0 ? "승인 대기 중" : research.permit == 1 ? "승인 완료" : "미승인"}</td>
-						<td>${research.permit == 1 ? "스케줄 보기" : ""}</td>
+						<td><a href="/research/makeTimeSlot?researchId=${research.researchId}">${research.permit == 1 ? "스케줄 생성" : ""}</a></td>
 					</tr>
 				</c:forEach>
 			</table>

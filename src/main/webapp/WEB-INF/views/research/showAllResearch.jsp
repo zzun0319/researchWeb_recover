@@ -49,7 +49,7 @@
 				<tr>
 					<td><a href="/research/showOneResearch?researchId=${research.researchId}">${research.researchTitle}</a></td>
 					<td>${research.rewardType} ${research.rewardValue} ${research.rewardType == "학점"? "점" : research.rewardType == "참가비"? "원" : "개"}</td>
-					<td> 조건 걸어야 함</td>
+					<td> <button onclick="location.href='/research/pickTimeSlot?researchId=${research.researchId}'">연구참여 날짜선택</button></td>
 				</tr>
 			</c:forEach>
 		</table>
