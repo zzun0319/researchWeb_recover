@@ -9,7 +9,7 @@
 <link href="<c:url value="/css/styles.css" />" rel="stylesheet" />
 
 </head>
-<body>
+<body style="bottom:0; left:0; right:0;">
 
 	<!-- Footer-->
     <footer class="py-5 bg-dark">

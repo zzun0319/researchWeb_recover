@@ -15,6 +15,7 @@
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" />
+	<div class="container">
 	<c:if test="${member != null}">
 		<script>
 			location.href="/user/mypage";
@@ -58,7 +59,7 @@
 		
 		
 	</div>
-
+	</div>
 	<jsp:include page="../include/footer.jsp" />
 
 </body>
