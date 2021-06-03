@@ -113,12 +113,19 @@ public class ResearchController {
 	public void studentAddClassPage(String studentId, Model model) {
 		System.out.println("수강 과목 추가 페이지 이동");
 		model.addAttribute("allClasses", service.getAllClassList());
+		for(ClassVO cvo : service.getAllClassList()) {
+			System.out.println(cvo);
+		}
 		model.addAttribute("takingClasses", service.getTakingClassList(studentId));
+		for(TakingClassVO tcvo : service.getTakingClassList(studentId)) {
+			System.out.println(tcvo);
+		}
 	}
 	
 	@PostMapping("/studentAddClass")
 	public String studentAddClass(TakingClassVO tcvo) {
 		System.out.println("수강 과목 등록 요청");
+		System.out.println(tcvo);
 		service.insertClassStudentPair(tcvo);
 		return "redirect:/research/studentAddClass?studentId=" + tcvo.getStudentId();
 	}

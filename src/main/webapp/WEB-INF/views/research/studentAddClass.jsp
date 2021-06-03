@@ -44,14 +44,23 @@ input{width:100%;}
 		</c:if>
 		<c:if test="${allClasses != null}">
 			<form method="post">
-			<input type="hidden" name="studentId" value="${member.userId}">
+			<%-- <input type="hidden" name="studentId" value="${member.userId}"> --%> <!-- 이게 있으면 2개씩 값이 넘어가.. mypage에서 여기로 올 때 넘긴 값이 남아있다가 자동으로 보내지나.. -->
 			<input type="hidden" name="studentName" value="${member.userName}">
 			내가 수강 중인 과목 추가 
 				<select name="classId">
-					<option>=== 수강 중인 과목 선택 ===</option>
+					<option>=== 수강 중인 과목 선택 ===</option> <!-- 강사, 지도교수가 등록한 과목 중 TakingClass에서 학생 본인아이디로 검색했을 떄 안나오는 것들만 -->
+					<c:if test="${takingClasses.size() > 0}">
 					<c:forEach var="classes" items="${allClasses}">
-					<option value="${classes.classId}">${classes.className} / ${classes.classSchedule} / ${classes.teacherName}</option>
+						<c:forEach var="tClass" items="${takingClasses}">
+							<option value="${classes.classId}" ${classes.classId == tClass.classId ? "disabled" : ""}> ${classes.className} / ${classes.classSchedule} / ${classes.teacherName}</option>
+						</c:forEach>
 					</c:forEach>
+					</c:if>
+					<c:if test="${takingClasses.size() == 0}">
+					<c:forEach var="classes" items="${allClasses}">
+							<option value="${classes.classId}"> ${classes.className} / ${classes.classSchedule} / ${classes.teacherName}</option>
+					</c:forEach>
+					</c:if>
 				</select>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit">+</button>
 			</form>
@@ -61,7 +70,7 @@ input{width:100%;}
 		<c:forEach var="classes" items="${allClasses}">
 			<c:forEach var="tClass" items="${takingClasses}">
 			 	<c:if test="${classes.classId == tClass.classId}">
-			 	- ${classes.className}(${classes.classSchedule}), ${classes.teacherName} : ${tClass.fillCredit}점 / ${tClass.requiredCredit}점
+			 	- ${classes.className}(${classes.classSchedule}), ${classes.teacherName} : ${tClass.fillCredit}점 / ${tClass.requiredCredit}점 <br>
 			 	</c:if>
 			</c:forEach>
 		</c:forEach>
