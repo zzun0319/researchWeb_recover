@@ -3,8 +3,10 @@ package com.junhee.researchWeb.research.service;
 import java.util.List;
 
 import com.junhee.researchWeb.model.ClassVO;
+import com.junhee.researchWeb.model.LocationVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.model.TakingClassVO;
+import com.junhee.researchWeb.model.TimeSlotVO;
 
 public interface IResearchService {
 
@@ -46,4 +48,10 @@ public interface IResearchService {
 	
 	// 수강 중인 클래스 정보 얻기
 	List<TakingClassVO> getTakingClassList(String studentId);
+	
+	// 모든 장소 정보 가져오기
+	List<LocationVO> getAllLocationInfo();
+	
+	// 연구 타임슬롯 등록하기
+	String registerTimeslot(int researchId, String researcher, String researchDate, String startTime, int peopleLimit, String locationName);
 }

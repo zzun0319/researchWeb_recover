@@ -5,29 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타임 슬롯 열기</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연구개설 페이지</title>
+
 <link rel="icon" type="image/x-icon" href="<c:url value="/assets/favicon.ico" />" />
 
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="<c:url value="/css/styles.css" />" rel="stylesheet" />
 <script type="text/javascript" src="<c:url value="/js/jquery-3.5.1.js" />"></script>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
-
 <style type="text/css">
 #rightColumn{
 	width: 80%;
 }
 
-input{width:100%;}
+*{padding:0; margin:0}
+
+input{width: 90%;}
+textarea{width: 100%; height: 100px;}
+
+td{width:40%;}
 
 </style>
 
@@ -49,11 +45,28 @@ input{width:100%;}
 
 	<jsp:include page="../include/header.jsp" />
 	
-		<p>날짜선택: <input type="text" id="datepicker"></p>
-		<p>시간 테스트: <input type="time" id="testTime"></p>
-		<p>날짜 테스트: <input type="date" id="testDate"></p>
-		<p>DateTime은 뭐야: <input type="datetime" id="dateTimeTest"></p>
-		
+		<div>
+		여기다가 만들어져있는 타임 슬롯 뿌릴거야
+		</div>
+		<form id="makeTimeslot" method="post">
+		<input type="hidden" name="researchId" value="${researchInfo.researchId}">
+		<input type="hidden" name="researcher" value="${researchInfo.researcher}">
+			<c:if test="${researchInfo.researchType == '오프라인 실험' || researchInfo.researchType == '오프라인 설문' || researchInfo.researchType == '기타(오프라인)'}">
+			<p>날짜 선택: <input type="date" name="researchDate"></p>
+			<p>연구 시작 시간: <input type="time" name="startTime" id="startTime"></p>
+			<p>연구 종료 시간: 연구 초기에 설정된 시간으로 자동으로 계산됩니다. </p>
+				<p>연구 장소: 
+				<select name="locationName" id="locationName">
+					<option>=== 장소 선택 ===</option>
+					<c:forEach var="location" items="${locations}">
+					<option value="${location.locationName}">${location.locationName}(최대 수용인원: ${location.accommodate}명)</option>
+					</c:forEach>
+				</select>
+				</p>
+			<p>참가자 수: <input type="number" name="peopleLimit" id="peopleLimit"> 명</p>
+			<input type="submit" value="타임슬롯 생성">
+			</c:if>
+		</form>
 	<jsp:include page="../include/footer.jsp" />
 
 </body>

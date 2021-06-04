@@ -35,6 +35,22 @@
 		<result property="fillCredit" column="fill_credit"/>
 	</resultMap>
 	
+	<resultMap id="LocationMap" type="com.junhee.researchWeb.model.LocationVO">
+		<id property="locationName" column="location_name" />
+		<result property="accommodate" column="accommodate"/>
+	</resultMap>
+	
+	<resultMap id="TimeslotMap" type="com.junhee.researchWeb.model.TimeSlotVO" >
+		<id property="timeslotId" column="timeslot_id" />
+		<result property="researchId" column="research_id"/>
+		<result property="researcher" column="researcher" />
+		<result property="researchDate" column="research_date" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="peopleLimit" column="people_limit" />
+		<result property="locationName" column="location_name" />
+	</resultMap>
+	
 	<insert id="registerResearch">
 		INSERT INTO research (research_id, research_title, research_purpose, research_method, researcher, reward_type, reward_value, take_time, research_type) 
 		VALUES (research_seq.NEXTVAL, #{researchTitle}, #{researchPurpose}, #{researchMethod}, #{researcher}, #{rewardType}, #{rewardValue}, #{takeTime}, #{researchType})
@@ -86,6 +102,19 @@
 	
 	<select id="getTakingClassList" resultMap="TakingClassMap">
 		SELECT * FROM taking_class WHERE student_id=#{studentId}
+	</select>
+	
+	<select id="getAllLocationInfo" resultMap="LocationMap">
+		SELECT * FROM location_tb
+	</select>
+	
+	<insert id="registerTimeslot">
+		INSERT INTO timeslot (timeslot_id, research_id, researcher, research_date, start_time, end_time, people_limit, location_name) 
+		VALUES (ts_seq.NEXTVAL, #{researchId}, #{researcher}, #{researchDate}, #{startTime}, #{endTime}, #{peopleLimit}, #{locationName})
+	</insert>
+	
+	<select id="getMaxLimitPeople" resultType="int">
+		SELECT accommodate FROM location_tb WHERE location_name=#{locationName}
 	</select>
 
 </mapper>

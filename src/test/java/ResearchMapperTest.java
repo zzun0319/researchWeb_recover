@@ -1,3 +1,4 @@
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.junit.Test;
@@ -7,8 +8,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.junhee.researchWeb.model.ClassVO;
+import com.junhee.researchWeb.model.LocationVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.model.TakingClassVO;
+import com.junhee.researchWeb.model.TimeSlotVO;
 import com.junhee.researchWeb.research.repository.IResearchMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -150,6 +153,31 @@ public class ResearchMapperTest {
 		for(TakingClassVO tcvo : mapper.getTakingClassList("abc1234")) {
 			System.out.println(tcvo);
 		}
+	}
+	
+	@Test
+	public void getAllLocationTest() {
+		for(LocationVO lvo : mapper.getAllLocationInfo()) {
+			System.out.println(lvo);
+		}
+	}
+	
+	@Test
+	public void getMaxPeopleTest() {
+		System.out.println(mapper.getMaxLimitPeople("율곡관 370호"));
+	}
+	
+	@Test
+	public void registerTimeslotTest() {
+		TimeSlotVO tsvo = new TimeSlotVO();
+		tsvo.setResearchId(2);
+		tsvo.setResearcher("ppppp1111");
+		tsvo.setResearchDate(Timestamp.valueOf("2021-06-12 00:00:00"));
+		tsvo.setStartTime(Timestamp.valueOf("2021-06-12 13:00:00"));
+		tsvo.setEndTime(Timestamp.valueOf("2021-06-12 13:30:00"));
+		tsvo.setPeopleLimit(4);
+		tsvo.setLocationName("율곡관 370호");
+		mapper.registerTimeslot(tsvo);
 	}
 	
 }

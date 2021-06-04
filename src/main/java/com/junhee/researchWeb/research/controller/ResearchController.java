@@ -2,6 +2,8 @@ package com.junhee.researchWeb.research.controller;
 
 
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.ResearchListVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.model.TakingClassVO;
+import com.junhee.researchWeb.model.TimeSlotVO;
 import com.junhee.researchWeb.research.service.ResearchService;
 import com.junhee.researchWeb.user.model.UserVO;
 
@@ -131,8 +134,22 @@ public class ResearchController {
 	}
 	
 	@GetMapping("/makeTimeSlot")
-	public void makeTimeSlotPage(String researchId) {
-		
+	public void makeTimeSlotPage(int researchId, Model model) {
+		System.out.println("타임슬롯 만들기 페이지, 연구번호: " + researchId);
+		model.addAttribute("researchInfo", service.getResearchInfo(researchId));
+		model.addAttribute("locations", service.getAllLocationInfo());
+	}
+	
+	@PostMapping("/makeTimeSlot")
+	public String makeTimeSlot(int researchId, String researcher, String researchDate, String startTime,
+			int peopleLimit, String locationName, RedirectAttributes ra) {
+		// service로부터 뭔가 받자 int든 bool이든
+		System.out.println("타임슬롯 만들기 요청");
+		System.out.println(researchId + ", " + researcher + ", " + researchDate + ", " + startTime + ", " + peopleLimit + ", " + locationName);
+		String result = service.registerTimeslot(researchId, researcher, researchDate, startTime, peopleLimit, locationName);
+		System.out.println("타임슬롯 등록 결과: " + result);
+		ra.addFlashAttribute("msg", result);
+		return "redirect:/user/mypage";
 	}
 	
 	@GetMapping("/pickTimeSlot")
