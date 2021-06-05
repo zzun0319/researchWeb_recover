@@ -48,8 +48,11 @@ input{width:100%;}
 			<input type="hidden" name="studentName" value="${member.userName}">
 			내가 수강 중인 과목 추가 
 				<select name="classId">
-					<option>=== 수강 중인 과목 선택 ===</option> <!-- 강사, 지도교수가 등록한 과목 중 TakingClass에서 학생 본인아이디로 검색했을 떄 안나오는 것들만 -->
-					<c:if test="${takingClasses.size() > 0}">
+					<option value="-1">=== 수강 중인 과목 선택 ===</option> <!-- 강사, 지도교수가 등록한 과목 중 TakingClass에서 학생 본인아이디로 검색했을 떄 안나오는 것들만 -->
+					<c:if test="${takingClasses.size() == allClasses.size()}">
+						<option disabled> 모두 수강중입니다. </option>
+					</c:if>
+					<c:if test="${takingClasses.size() > 0 && takingClasses.size() != allClasses.size()}">
 					<c:forEach var="classes" items="${allClasses}">
 						<c:forEach var="tClass" items="${takingClasses}">
 							<option value="${classes.classId}" ${classes.classId == tClass.classId ? "disabled" : ""}> ${classes.className} / ${classes.classSchedule} / ${classes.teacherName}</option>
@@ -62,7 +65,7 @@ input{width:100%;}
 					</c:forEach>
 					</c:if>
 				</select>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit">+</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" ${takingClasses.size() == allClasses.size() ? "disabled" : ""}>+</button>
 			</form>
 		</c:if>
 		<hr>

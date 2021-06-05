@@ -128,9 +128,15 @@ public class ResearchController {
 	@PostMapping("/studentAddClass")
 	public String studentAddClass(TakingClassVO tcvo) {
 		System.out.println("수강 과목 등록 요청");
-		System.out.println(tcvo);
-		service.insertClassStudentPair(tcvo);
-		return "redirect:/research/studentAddClass?studentId=" + tcvo.getStudentId();
+		if(tcvo.getClassId() == -1) {
+			System.out.println("잘못된 요청");
+			return "redirect:/research/studentAddClass?studentId=" + tcvo.getStudentId();
+		}
+		else {
+			System.out.println(tcvo);
+			service.insertClassStudentPair(tcvo);
+			return "redirect:/research/studentAddClass?studentId=" + tcvo.getStudentId();
+		}
 	}
 	
 	@GetMapping("/makeTimeSlot")

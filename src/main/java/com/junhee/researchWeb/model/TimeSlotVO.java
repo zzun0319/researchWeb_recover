@@ -18,7 +18,6 @@ public class TimeSlotVO {
 
 	public TimeSlotVO(int timeslotId, int researchId, String researcher, Timestamp researchDate, Timestamp startTime,
 			Timestamp endTime, int peopleLimit, String locationName, int applyNumber) {
-		super();
 		this.timeslotId = timeslotId;
 		this.researchId = researchId;
 		this.researcher = researcher;
