@@ -161,8 +161,15 @@ public class ResearchController {
 	@PostMapping("/inquireTimeslotsByPeriod")
 	public String inquireTimeslotsByPeriod(String startDate, String endDate, int researchId, RedirectAttributes ra) {
 		System.out.println("기간별 연구실 예약 현황 조회");
-		ra.addFlashAttribute("inquireList", service.getTimeslotListsByPeriod(startDate, endDate));
-		return "redirect:/research/makeTimeSlot?researchId=" + researchId;
+		System.out.println(startDate + ", " + endDate);
+		if(startDate == "" || endDate == "") {
+			return "redirect:/research/makeTimeSlot?researchId=" + researchId;
+		}
+		else {
+			ra.addFlashAttribute("inquireList", service.getTimeslotListsByPeriod(startDate, endDate));
+			return "redirect:/research/makeTimeSlot?researchId=" + researchId;
+		}
+		
 	}
 	
 	

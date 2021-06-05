@@ -139,10 +139,20 @@ public class ResearchService implements IResearchService {
 			tsvo.setEndTime(Timestamp.valueOf(endTime));
 			tsvo.setPeopleLimit(peopleLimit);
 			tsvo.setLocationName(locationName);
+			
+			for(TimeSlotVO tmp : mapper.getAllTimeslots()) { // 기한 겹치면서 && 연구실이 같은 이전 타임슬롯이 있는지 검사
+				System.out.println(tmp.getStartTime().before(Timestamp.valueOf(endTime)));
+				System.out.println(Timestamp.valueOf(researchDate + " " + startTime + ":00").before(tmp.getEndTime()));
+				System.out.println(tmp.getLocationName().equals(locationName));
+				if((tmp.getStartTime().before(Timestamp.valueOf(endTime)) || Timestamp.valueOf(researchDate + " " + startTime + ":00").before(tmp.getEndTime())) && tmp.getLocationName().equals(locationName)) {
+					return "해당 장소는 이미 존재하는 타임슬롯과 연구 기한이 겹칩니다. 타임슬롯을 만들 수 없습니다.";
+				} 
+			}
+			
 			mapper.registerTimeslot(tsvo);
 			return "타임슬롯이 등록되었습니다.";
+			
 		}
-		
 	}
 
 	@Override

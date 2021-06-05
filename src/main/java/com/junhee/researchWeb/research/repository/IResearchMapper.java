@@ -67,6 +67,9 @@ public interface IResearchMapper {
 	// 날짜 기간 사이에 예약된 타임슬롯 리스트 가져오기
 	List<TimeSlotVO> getTimeslotListsByPeriod(Map<String, String> periods);
 	
+	// 모든 타임슬롯 가져오기
+	List<TimeSlotVO> getAllTimeslots();
+	
 	// 날짜별 참여가능 연구 가져오기
 	
 }
