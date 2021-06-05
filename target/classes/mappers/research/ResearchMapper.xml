@@ -49,6 +49,7 @@
 		<result property="endTime" column="end_time" />
 		<result property="peopleLimit" column="people_limit" />
 		<result property="locationName" column="location_name" />
+		<result property="applyNumber" column="apply_number"/>
 	</resultMap>
 	
 	<insert id="registerResearch">
@@ -115,6 +116,10 @@
 	
 	<select id="getMaxLimitPeople" resultType="int">
 		SELECT accommodate FROM location_tb WHERE location_name=#{locationName}
+	</select>
+	
+	<select id="getTimeslotsByResearchId" resultMap="TimeslotMap">
+		SELECT * FROM timeslot WHERE research_id=#{researchId} ORDER BY research_date DESC, start_time DESC
 	</select>
 
 </mapper>

@@ -180,4 +180,11 @@ public class ResearchMapperTest {
 		mapper.registerTimeslot(tsvo);
 	}
 	
+	@Test
+	public void getTimeslotsByResearchIdTest() {
+		for(TimeSlotVO tsvo : mapper.getTimeslotsByResearchId(2)) {
+			System.out.println(tsvo);
+		}
+	}
+	
 }

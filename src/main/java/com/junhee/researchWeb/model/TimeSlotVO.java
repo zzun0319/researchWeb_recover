@@ -12,11 +12,13 @@ public class TimeSlotVO {
 	private Timestamp endTime;
 	private int peopleLimit;
 	private String locationName;
+	private int applyNumber;
 	
 	public TimeSlotVO() {}
 
 	public TimeSlotVO(int timeslotId, int researchId, String researcher, Timestamp researchDate, Timestamp startTime,
-			Timestamp endTime, int peopleLimit, String locationName) {
+			Timestamp endTime, int peopleLimit, String locationName, int applyNumber) {
+		super();
 		this.timeslotId = timeslotId;
 		this.researchId = researchId;
 		this.researcher = researcher;
@@ -25,6 +27,7 @@ public class TimeSlotVO {
 		this.endTime = endTime;
 		this.peopleLimit = peopleLimit;
 		this.locationName = locationName;
+		this.applyNumber = applyNumber;
 	}
 
 	public int getTimeslotId() {
@@ -91,11 +94,20 @@ public class TimeSlotVO {
 		this.locationName = locationName;
 	}
 
+	public int getApplyNumber() {
+		return applyNumber;
+	}
+
+	public void setApplyNumber(int applyNumber) {
+		this.applyNumber = applyNumber;
+	}
+
 	@Override
 	public String toString() {
 		return "타임슬롯 정보 [timeslotId=" + timeslotId + ", researchId=" + researchId + ", researcher=" + researcher
 				+ ", researchDate=" + researchDate + ", startTime=" + startTime + ", endTime=" + endTime
-				+ ", peopleLimit=" + peopleLimit + ", locationName=" + locationName + "]";
+				+ ", peopleLimit=" + peopleLimit + ", locationName=" + locationName + ", applyNumber=" + applyNumber
+				+ "]";
 	}
 
 }

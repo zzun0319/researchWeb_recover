@@ -138,4 +138,9 @@ public class ResearchService implements IResearchService {
 		
 	}
 
+	@Override
+	public List<TimeSlotVO> getTimeslotsByResearchId(int researchId) {
+		return mapper.getTimeslotsByResearchId(researchId);
+	}
+
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -23,8 +24,6 @@
 input{width: 90%;}
 textarea{width: 100%; height: 100px;}
 
-td{width:40%;}
-
 </style>
 
 </head>
@@ -46,28 +45,80 @@ td{width:40%;}
 	<jsp:include page="../include/header.jsp" />
 	
 		<div>
-		여기다가 만들어져있는 타임 슬롯 뿌릴거야
+			<h3>[타임슬롯]</h3>
+			<table border="1">
+				<tr>
+					<td>날짜 및 시간</td>
+					<td>참가인원</td>
+					<td>신청 인원</td>
+					<td>연구 장소</td>
+					<td>상태변경</td>
+				</tr>
+				<c:forEach var="timeslot" items="${timeslotList}">
+					<tr>
+						<td><fmt:formatDate value="${timeslot.startTime}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>~<fmt:formatDate value="${timeslot.endTime}" pattern="HH시 mm분" /></td>
+						<td>${timeslot.applyNumber}명 / ${timeslot.peopleLimit}명</td>
+						<td>아직 구현 안 됨</td>
+						<td>${timeslot.locationName}</td>
+						<td>상태변경(버튼 구현 안 됨)</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
-		<form id="makeTimeslot" method="post">
-		<input type="hidden" name="researchId" value="${researchInfo.researchId}">
-		<input type="hidden" name="researcher" value="${researchInfo.researcher}">
-			<c:if test="${researchInfo.researchType == '오프라인 실험' || researchInfo.researchType == '오프라인 설문' || researchInfo.researchType == '기타(오프라인)'}">
-			<p>날짜 선택: <input type="date" name="researchDate"></p>
-			<p>연구 시작 시간: <input type="time" name="startTime" id="startTime"></p>
-			<p>연구 종료 시간: 연구 초기에 설정된 시간으로 자동으로 계산됩니다. </p>
-				<p>연구 장소: 
-				<select name="locationName" id="locationName">
-					<option>=== 장소 선택 ===</option>
-					<c:forEach var="location" items="${locations}">
-					<option value="${location.locationName}">${location.locationName}(최대 수용인원: ${location.accommodate}명)</option>
-					</c:forEach>
-				</select>
-				</p>
-			<p>참가자 수: <input type="number" name="peopleLimit" id="peopleLimit"> 명</p>
-			<input type="submit" value="타임슬롯 생성">
-			</c:if>
-		</form>
+		
+		<hr style="border: solid 5px black;">
+		<c:if test="${researchInfo.researchType == '오프라인 실험' || researchInfo.researchType == '오프라인 설문' || researchInfo.researchType == '기타(오프라인)'}">
+			<br> <h3>[타임슬롯 만들기]</h3>
+			<form id="makeTimeslot" method="post">
+			<input type="hidden" name="researchId" value="${researchInfo.researchId}">
+			<input type="hidden" name="researcher" value="${researchInfo.researcher}">
+			<table border="1">
+				<tr>
+					<td>날짜 선택</td>
+					<td id="rightColumn"><input type="date" name="researchDate"></td>
+				</tr>
+				<tr>
+					<td>연구 시작 시간</td>
+					<td id="rightColumn"><input type="time" name="startTime" id="startTime"></td>
+				</tr>
+				<tr>
+					<td>연구 종료 시간</td>
+					<td id="rightColumn">연구 초기에 설정된 시간으로 자동으로 계산됩니다.</td>
+				</tr>
+				<tr>
+					<td>연구 장소</td>
+					<td id="rightColumn">
+						<select name="locationName" id="locationName">
+							<option>=== 장소 선택 ===</option>
+							<c:forEach var="location" items="${locations}">
+							<option value="${location.locationName}">${location.locationName}(최대 수용인원: ${location.accommodate}명)</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>참가자 수</td>
+					<td id="rightColumn"><input type="number" name="peopleLimit" id="peopleLimit"> 명</td>
+				</tr>
+				<tr><td colspan="2" align="center"><input type="submit" value="타임슬롯 생성" style="background-color: skyblue;"></td></tr>
+			</table>
+			</form>
+		</c:if>
+		<c:if test="${researchInfo.researchType == '온라인 실험' || researchInfo.researchType == '온라인 설문' || researchInfo.researchType == '기타(온라인)'}">
+			<form method="post" action="/research/attachUrl">
+				<p>링크 첨부하기: <input type="url" name="researchUrl"></p>
+				<input type="submit" value="링크 첨부">
+			</form>
+		</c:if>
+		
 	<jsp:include page="../include/footer.jsp" />
 
 </body>
 </html>
+
+<script>
+	const result = "${msg}"
+	if(result != "" && result.length > 0){
+		alert(result);
+	}
+</script>

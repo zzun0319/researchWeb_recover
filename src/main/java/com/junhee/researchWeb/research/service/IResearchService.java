@@ -54,4 +54,9 @@ public interface IResearchService {
 	
 	// 연구 타임슬롯 등록하기
 	String registerTimeslot(int researchId, String researcher, String researchDate, String startTime, int peopleLimit, String locationName);
+	
+	// 연구별 타임슬롯 가져오기
+	List<TimeSlotVO> getTimeslotsByResearchId(int researchId);
+	
+	
 }

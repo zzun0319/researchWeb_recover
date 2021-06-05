@@ -138,6 +138,7 @@ public class ResearchController {
 		System.out.println("타임슬롯 만들기 페이지, 연구번호: " + researchId);
 		model.addAttribute("researchInfo", service.getResearchInfo(researchId));
 		model.addAttribute("locations", service.getAllLocationInfo());
+		model.addAttribute("timeslotList", service.getTimeslotsByResearchId(researchId));
 	}
 	
 	@PostMapping("/makeTimeSlot")
@@ -149,7 +150,7 @@ public class ResearchController {
 		String result = service.registerTimeslot(researchId, researcher, researchDate, startTime, peopleLimit, locationName);
 		System.out.println("타임슬롯 등록 결과: " + result);
 		ra.addFlashAttribute("msg", result);
-		return "redirect:/user/mypage";
+		return "redirect:/research/makeTimeSlot?researchId=" + researchId;
 	}
 	
 	@GetMapping("/pickTimeSlot")

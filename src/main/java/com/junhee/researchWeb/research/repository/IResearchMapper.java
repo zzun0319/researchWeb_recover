@@ -57,4 +57,11 @@ public interface IResearchMapper {
 	
 	// 장소 최대인원 불러오기
 	int getMaxLimitPeople(String locationName);
+	
+	// 연구별 타임슬롯 가져오기
+	List<TimeSlotVO> getTimeslotsByResearchId(int researchId);
+	
+	// 날짜별 참여가능 연구 가져오기
+	
+	
 }
