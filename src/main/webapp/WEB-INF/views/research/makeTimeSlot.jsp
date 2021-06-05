@@ -21,7 +21,7 @@
 
 *{padding:0; margin:0}
 
-input{width: 90%;}
+/* input{width: 90%;} */
 textarea{width: 100%; height: 100px;}
 
 </style>
@@ -43,30 +43,41 @@ textarea{width: 100%; height: 100px;}
 	</c:if>
 
 	<jsp:include page="../include/header.jsp" />
-	
 		<div>
-			<h3>[타임슬롯]</h3>
-			<table border="1">
-				<tr>
-					<td>날짜 및 시간</td>
-					<td>참가인원</td>
-					<td>신청 인원</td>
-					<td>연구 장소</td>
-					<td>상태변경</td>
-				</tr>
-				<c:forEach var="timeslot" items="${timeslotList}">
-					<tr>
-						<td><fmt:formatDate value="${timeslot.startTime}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>~<fmt:formatDate value="${timeslot.endTime}" pattern="HH시 mm분" /></td>
-						<td>${timeslot.applyNumber}명 / ${timeslot.peopleLimit}명</td>
-						<td>아직 구현 안 됨</td>
-						<td>${timeslot.locationName}</td>
-						<td>상태변경(버튼 구현 안 됨)</td>
-					</tr>
-				</c:forEach>
-			</table>
+		<h4>날짜 및 장소 별 예약 현황 조회</h4>
+		<form action="/research/inquireTimeslotsByPeriod" method="post"><!-- 페이징.. 검색.. 구현 -->
+		<input type="hidden" name="researchId" value="${researchInfo.researchId}">
+			언제부터 : <input type="date" name="startDate"> ~ 언제까지: <input type="date" name="endDate"> <input type="submit" value="조회하기">
+		</form>
 		</div>
 		
-		<hr style="border: solid 5px black;">
+		<div>
+		<c:if test="${inquireList == null || inquireList.size() == 0}">
+		 조회결과가 없습니다.
+		</c:if>
+		<c:if test="${inquireList.size() > 0}">
+			<table border="1" style="color: blue;">
+			<tr>
+				<td colspan="3">예약된 장소 및 일정</td>
+			</tr>
+			<tr>
+				<td>장소</td>
+				<td>날짜</td>
+				<td>시간</td>
+			</tr>
+			<c:forEach var="inquiredTimeslot" items="${inquireList}">
+				<tr>
+					<td>${inquiredTimeslot.locationName}</td>
+					<td><fmt:formatDate value="${inquiredTimeslot.researchDate}" pattern="yyyy년 MM월 dd일" /></td>
+					<td><fmt:formatDate value="${inquiredTimeslot.startTime}" pattern="HH시 mm분" /> ~ <fmt:formatDate value="${inquiredTimeslot.endTime}" pattern="HH시 mm분" /></td>
+				</tr>
+			</c:forEach>
+			</table>
+		</c:if>
+		</div>
+		
+		<hr style="border: solid 5px green;">
+		
 		<c:if test="${researchInfo.researchType == '오프라인 실험' || researchInfo.researchType == '오프라인 설문' || researchInfo.researchType == '기타(오프라인)'}">
 			<br> <h3>[타임슬롯 만들기]</h3>
 			<form id="makeTimeslot" method="post">
@@ -110,6 +121,30 @@ textarea{width: 100%; height: 100px;}
 				<input type="submit" value="링크 첨부">
 			</form>
 		</c:if>
+		
+		<hr style="border: solid 5px black;">
+		
+		<div>
+			<h3>[${researchInfo.researchTitle}의 타임슬롯]</h3>
+			<table border="1">
+				<tr>
+					<td>날짜 및 시간</td>
+					<td>참가인원</td>
+					<td>신청 인원</td>
+					<td>연구 장소</td>
+					<td>상태변경</td>
+				</tr>
+				<c:forEach var="timeslot" items="${timeslotList}">
+					<tr>
+						<td><fmt:formatDate value="${timeslot.startTime}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>~<fmt:formatDate value="${timeslot.endTime}" pattern="HH시 mm분" /></td>
+						<td>${timeslot.applyNumber}명 / ${timeslot.peopleLimit}명</td>
+						<td>아직 구현 안 됨</td>
+						<td>${timeslot.locationName}</td>
+						<td>상태변경(버튼 구현 안 됨)</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
 		
 	<jsp:include page="../include/footer.jsp" />
 

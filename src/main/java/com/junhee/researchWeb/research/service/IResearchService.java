@@ -1,5 +1,6 @@
 package com.junhee.researchWeb.research.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.junhee.researchWeb.model.ClassVO;
@@ -57,6 +58,9 @@ public interface IResearchService {
 	
 	// 연구별 타임슬롯 가져오기
 	List<TimeSlotVO> getTimeslotsByResearchId(int researchId);
+	
+	// 날짜 기간 사이에 예약된 타임슬롯 리스트 가져오기
+	List<TimeSlotVO> getTimeslotListsByPeriod(String startDate, String endDate);
 	
 	
 }

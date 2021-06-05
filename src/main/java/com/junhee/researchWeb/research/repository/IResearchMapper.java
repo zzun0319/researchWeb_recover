@@ -1,6 +1,9 @@
 package com.junhee.researchWeb.research.repository;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.junhee.researchWeb.model.ClassVO;
 import com.junhee.researchWeb.model.LocationVO;
@@ -61,7 +64,9 @@ public interface IResearchMapper {
 	// 연구별 타임슬롯 가져오기
 	List<TimeSlotVO> getTimeslotsByResearchId(int researchId);
 	
-	// 날짜별 참여가능 연구 가져오기
+	// 날짜 기간 사이에 예약된 타임슬롯 리스트 가져오기
+	List<TimeSlotVO> getTimeslotListsByPeriod(Map<String, String> periods);
 	
+	// 날짜별 참여가능 연구 가져오기
 	
 }

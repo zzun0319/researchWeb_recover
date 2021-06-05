@@ -158,5 +158,12 @@ public class ResearchController {
 		System.out.println("연구 번호 " + researchId + "의 스케줄 보기");
 	}
 	
+	@PostMapping("/inquireTimeslotsByPeriod")
+	public String inquireTimeslotsByPeriod(String startDate, String endDate, int researchId, RedirectAttributes ra) {
+		System.out.println("기간별 연구실 예약 현황 조회");
+		ra.addFlashAttribute("inquireList", service.getTimeslotListsByPeriod(startDate, endDate));
+		return "redirect:/research/makeTimeSlot?researchId=" + researchId;
+	}
+	
 	
 }

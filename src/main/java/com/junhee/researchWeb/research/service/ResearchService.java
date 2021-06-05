@@ -1,7 +1,9 @@
 package com.junhee.researchWeb.research.service;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -110,6 +112,11 @@ public class ResearchService implements IResearchService {
 		if(peopleLimit > mapper.getMaxLimitPeople(locationName)) {
 			return "최대 수용 가능한 인원 수를 초과하여 타임슬롯 등록에 실패";
 		}
+		
+		
+		// 조건들 추가해야함. 장소예약 체크(그 날짜, 그 시간에 해당 장소가 예약되어있으면 타임슬롯 못 만들도록, 이보다 더 나은 방법은 애초에 날짜, 시간 겹치면 장소가 선택지에 안 뜨도록). 
+		// 아니면 타임슬롯 만드는 것도 나눠서 첫번째 페이지에서는 날짜 기간 조회하면 예약 현황 보여주고, 그거 보고 날짜, 시작시간, 장소 결정할 수 있도록 makeTimeSlot페이지에 조회기능을 넣어..
+		
 		else {
 			TimeSlotVO tsvo = new TimeSlotVO();
 			tsvo.setResearchId(researchId);
@@ -141,6 +148,14 @@ public class ResearchService implements IResearchService {
 	@Override
 	public List<TimeSlotVO> getTimeslotsByResearchId(int researchId) {
 		return mapper.getTimeslotsByResearchId(researchId);
+	}
+
+	@Override
+	public List<TimeSlotVO> getTimeslotListsByPeriod(String startDate, String endDate) {
+		Map<String, String> periods = new HashMap<String, String>();
+		periods.put("startDate", startDate + " 00:00:00");
+		periods.put("endDate", endDate + " 23:59:59");
+		return mapper.getTimeslotListsByPeriod(periods);
 	}
 
 }

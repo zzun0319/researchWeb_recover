@@ -121,5 +121,10 @@
 	<select id="getTimeslotsByResearchId" resultMap="TimeslotMap">
 		SELECT * FROM timeslot WHERE research_id=#{researchId} ORDER BY research_date DESC, start_time DESC
 	</select>
+	
+	<select id="getTimeslotListsByPeriod" resultMap="TimeslotMap" parameterType="hashMap">
+		SELECT * FROM timeslot WHERE research_date BETWEEN TO_TIMESTAMP(#{startDate}, 'YYYY-MM-DD HH24:mi:SS') AND TO_TIMESTAMP(#{endDate}, 'YYYY-MM-DD HH24:mi:SS') 
+		ORDER BY research_date ASC, start_time ASC, location_name DESC
+	</select>
 
 </mapper>

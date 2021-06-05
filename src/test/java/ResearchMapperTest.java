@@ -1,5 +1,7 @@
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -183,6 +185,16 @@ public class ResearchMapperTest {
 	@Test
 	public void getTimeslotsByResearchIdTest() {
 		for(TimeSlotVO tsvo : mapper.getTimeslotsByResearchId(2)) {
+			System.out.println(tsvo);
+		}
+	}
+	
+	@Test
+	public void getTimeslotListsByPeriodTest() {
+		Map<String, String> periods = new HashMap<String, String>();
+		periods.put("startDate", "2021-06-12 00:00:00");
+		periods.put("endDate", "2021-06-18 00:00:00");
+		for(TimeSlotVO tsvo : mapper.getTimeslotListsByPeriod(periods)) {
 			System.out.println(tsvo);
 		}
 	}
