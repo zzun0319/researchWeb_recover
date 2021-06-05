@@ -49,11 +49,15 @@
 				<tr>
 					<td><a href="/research/showOneResearch?researchId=${research.researchId}">${research.researchTitle}</a></td>
 					<td>${research.rewardType} ${research.rewardValue} ${research.rewardType == "학점"? "점" : research.rewardType == "참가비"? "원" : "개"}</td>
-					<td> <button onclick="location.href='/research/pickTimeSlot?researchId=${research.researchId}'">연구참여 날짜선택</button></td>
+					<td> <button onclick="location.href='/research/selectDate?researchId=${research.researchId}&studentId=${member.userId}'">연구참여 날짜선택</button></td>
 				</tr>
 			</c:forEach>
 		</table>
 	</p>
+	<hr style="border: solid 5px black;">
+	<br>
+	<a href="/research/inquireDate">날짜로 참여가능한 연구 조회하기</a>
+	
 	<jsp:include page="../include/footer.jsp" />
 
 </body>

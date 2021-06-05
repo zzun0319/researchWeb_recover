@@ -8,6 +8,7 @@ import com.junhee.researchWeb.model.LocationVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.model.TakingClassVO;
 import com.junhee.researchWeb.model.TimeSlotVO;
+import com.junhee.researchWeb.model.TsReserveVO;
 
 public interface IResearchService {
 
@@ -61,6 +62,15 @@ public interface IResearchService {
 	
 	// 날짜 기간 사이에 예약된 타임슬롯 리스트 가져오기
 	List<TimeSlotVO> getTimeslotListsByPeriod(String startDate, String endDate);
+	
+	// 타임슬롯 예약하기
+	String reserveTimeslot(TsReserveVO tsvo);
+	
+	// 참여중인 타임슬롯 리스트 가져오기
+	List<TsReserveVO> getAppliedTimeslots(String studentId);
+	
+	// 참여중인 타임슬롯 리스트 가져오기
+	List<TimeSlotVO> getTimeslotsApplied(String studentId);
 	
 	
 }

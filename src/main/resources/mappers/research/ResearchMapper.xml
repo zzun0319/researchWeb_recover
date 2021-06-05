@@ -52,6 +52,15 @@
 		<result property="applyNumber" column="apply_number"/>
 	</resultMap>
 	
+	<resultMap id="ReserveMap" type="com.junhee.researchWeb.model.TsReserveVO" >
+		<id property="reserveNum" column="reserve_num" />
+		<result property="timeslotId" column="timeslot_id" />
+		<result property="researchId" column="research_id" />
+		<result property="studentId" column="student_id" />
+		<result property="takingClassId" column="takingclass_id" />
+		<result property="status" column="status" />
+	</resultMap>
+	
 	<insert id="registerResearch">
 		INSERT INTO research (research_id, research_title, research_purpose, research_method, researcher, reward_type, reward_value, take_time, research_type) 
 		VALUES (research_seq.NEXTVAL, #{researchTitle}, #{researchPurpose}, #{researchMethod}, #{researcher}, #{rewardType}, #{rewardValue}, #{takeTime}, #{researchType})
@@ -129,6 +138,18 @@
 	
 	<select id="getAllTimeslots" resultMap="TimeslotMap">
 		SELECT * FROM timeslot
+	</select>
+	
+	<insert id="reserveTimeslot">
+		INSERT INTO timeslot_reserve (reserve_num, timeslot_id, research_id, student_id, takingclass_id) VALUES (tr_seq.NEXTVAL, #{timeslotId}, #{researchId}, #{studentId}, #{takingClassId})
+	</insert>
+	
+	<select id="getAppliedTimeslots" resultMap="ReserveMap">
+		SELECT * FROM timeslot_reserve WHERE student_id=#{studentId}
+	</select>
+
+	<select id="getTimeslotsApplied" resultMap="TimeslotMap">
+		SELECT * FROM timeslot A WHERE A.timeslot_id IN (SELECT B.timeslot_id FROM timeslot_reserve B WHERE student_id=#{studentId})
 	</select>
 
 </mapper>

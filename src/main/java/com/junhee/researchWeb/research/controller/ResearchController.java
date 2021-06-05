@@ -4,6 +4,7 @@ package com.junhee.researchWeb.research.controller;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.junhee.researchWeb.model.ResearchListVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.model.TakingClassVO;
 import com.junhee.researchWeb.model.TimeSlotVO;
+import com.junhee.researchWeb.model.TsReserveVO;
 import com.junhee.researchWeb.research.service.ResearchService;
 import com.junhee.researchWeb.user.model.UserVO;
 
@@ -178,5 +180,36 @@ public class ResearchController {
 		
 	}
 	
+	@GetMapping("/selectDate")
+	public void selectDatePage(Model model, int researchId, String studentId) {
+		model.addAttribute("timeslots", service.getTimeslotsByResearchId(researchId));
+		model.addAttribute("researchInfo", service.getResearchInfo(researchId));
+		model.addAttribute("takingClasses", service.getTakingClassList(studentId));
+		List<ClassVO> cList = new ArrayList<ClassVO>();
+		for(TakingClassVO tcvo : service.getTakingClassList(studentId)) {
+			cList.add(service.getClassInfo(tcvo.getClassId()));
+		}
+		model.addAttribute("cList", cList);
+	}
+	
+	@PostMapping("/applyTimeslot")
+	public String applyTimeSlot(TsReserveVO trvo, RedirectAttributes ra) {
+		System.out.println("연구 참여 요청이 들어옴.");
+		ra.addFlashAttribute("msg", service.reserveTimeslot(trvo));
+		return "redirect:/research/showMyApply?studentId=" + trvo.getStudentId();
+	}
+	
+	@GetMapping("/showMyApply")
+	public void showMyApply(String studentId, Model model) {
+		System.out.println("내 참여연구 보기 요청이 들어옴.");
+		model.addAttribute("applyList", service.getTimeslotsApplied(studentId));
+		List<ResearchVO> rList = new ArrayList<>();
+		for(TsReserveVO tsvo : service.getAppliedTimeslots(studentId)) {
+			rList.add(service.getResearchInfo(tsvo.getResearchId()));
+		}
+		model.addAttribute("rList", rList);
+		model.addAttribute("allClasses", service.getAllClassList());
+		model.addAttribute("takingClasses", service.getTakingClassList(studentId));
+	}
 	
 }

@@ -24,7 +24,6 @@ public class TakingClassVO {
 
 	public TakingClassVO(int pairNumber, String studentId, String studentName, int classId, int requiredCredit,
 			int fillCredit) {
-		super();
 		this.pairNumber = pairNumber;
 		this.studentId = studentId;
 		this.studentName = studentName;

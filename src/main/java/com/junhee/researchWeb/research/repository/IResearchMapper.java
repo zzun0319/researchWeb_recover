@@ -10,6 +10,7 @@ import com.junhee.researchWeb.model.LocationVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.model.TakingClassVO;
 import com.junhee.researchWeb.model.TimeSlotVO;
+import com.junhee.researchWeb.model.TsReserveVO;
 
 public interface IResearchMapper {
 
@@ -70,6 +71,13 @@ public interface IResearchMapper {
 	// 모든 타임슬롯 가져오기
 	List<TimeSlotVO> getAllTimeslots();
 	
-	// 날짜별 참여가능 연구 가져오기
+	// 타임슬롯 예약하기
+	void reserveTimeslot(TsReserveVO tsvo);
+	
+	// 참여중인 타임슬롯 예약 리스트 가져오기
+	List<TsReserveVO> getAppliedTimeslots(String studentId);
+	
+	// 참여중인 타임슬롯 리스트 가져오기
+	List<TimeSlotVO> getTimeslotsApplied(String studentId);
 	
 }

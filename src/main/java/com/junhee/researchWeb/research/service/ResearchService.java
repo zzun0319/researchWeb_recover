@@ -13,6 +13,7 @@ import com.junhee.researchWeb.model.LocationVO;
 import com.junhee.researchWeb.model.ResearchVO;
 import com.junhee.researchWeb.model.TakingClassVO;
 import com.junhee.researchWeb.model.TimeSlotVO;
+import com.junhee.researchWeb.model.TsReserveVO;
 import com.junhee.researchWeb.research.repository.IResearchMapper;
 
 @Service
@@ -166,6 +167,34 @@ public class ResearchService implements IResearchService {
 		periods.put("startDate", startDate + " 00:00:00");
 		periods.put("endDate", endDate + " 23:59:59");
 		return mapper.getTimeslotListsByPeriod(periods);
+	}
+
+	@Override
+	public String reserveTimeslot(TsReserveVO trvo) {
+		List<TsReserveVO> tsList = mapper.getAppliedTimeslots(trvo.getStudentId());
+		int cnt = 0;
+		for(TsReserveVO tsvo : tsList) {
+			if(tsvo.getResearchId() == trvo.getResearchId()) {
+				cnt++;
+			}
+		}
+		if(cnt > 0) {
+			return "이미 참여 중인 연구입니다. 같은 연구를 여러 번 참여할 수 없습니다.";
+		} else {
+			mapper.reserveTimeslot(trvo);
+			return "연구 참여 신청이 완료되었습니다.";
+		}
+		
+	}
+
+	@Override
+	public List<TsReserveVO> getAppliedTimeslots(String studentId) {
+		return mapper.getAppliedTimeslots(studentId);
+	}
+
+	@Override
+	public List<TimeSlotVO> getTimeslotsApplied(String studentId) {
+		return mapper.getTimeslotsApplied(studentId);
 	}
 
 }
